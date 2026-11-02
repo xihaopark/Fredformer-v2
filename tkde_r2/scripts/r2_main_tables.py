@@ -42,6 +42,9 @@ def ours_runs() -> pd.DataFrame:
                 if m:
                     rows.append((ds, h, 2021, float(m[-1][0]), float(m[-1][1])))
                     break
+    s21 = R2 / "main_seed2021_results.csv"  # the same rows, shipped for the code release (no logs needed)
+    if s21.exists():
+        rows += [tuple(r) for r in pd.read_csv(s21)[["dataset", "horizon", "seed", "mse", "mae"]].itertuples(index=False)]
     d = pd.DataFrame(rows, columns=["dataset", "horizon", "seed", "mse", "mae"])
     d = d.drop_duplicates(["dataset", "horizon", "seed"])
     d = d[~((d.dataset == "Solar") & (d.seed > 2023))]  # protocol: three seeds (2021-2023) for Solar
