@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+checkpoints/
+results/
+test_results/
+logs/
+*.bak*

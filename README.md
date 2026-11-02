@@ -1,6 +1,21 @@
-# Fredformer
+# Fredformer / Fredformer-v2
 
-This code is related to the paper "Fredformer: Frequency Debiased Transformer for Time Series Forecasting" (KDD2024).
+This repository contains the code of
+
+* **Fredformer-v2: Frequency-Debiased Transformer with Stationarity-Aware Frequency Weighting for Time Series Forecasting** (journal extension, under review at IEEE TKDE), and
+* **Fredformer: Frequency Debiased Transformer for Time Series Forecasting** (KDD 2024).
+
+## What is new in Fredformer-v2
+
+* **FredNormer** (`--cv_weighting_mode direct`, default): before training, the coefficient of variation
+  S(k) = sigma(k)/mu(k) of the DFT amplitudes of instance-normalized training windows is computed once
+  (pooled over windows and channels; S(k) = 0 if mu(k) <= 1e-8). The same real factor S(k) multiplies the real
+  and imaginary DFT coefficients of every input window, so phase and conjugate symmetry are preserved.
+  FredNormer has no trainable parameters. `--disable_cv_weighting` removes it.
+* Control weightings (constant, permuted, inverse, learned mask, learned monotone), FAN/SAN plug-ins, and
+  test-only distribution shifts used for the controlled evaluation.
+* Nystrom channel attention for high-dimensional data (`--use_nys 1 --num_landmarks 64`).
+* All experiments of the TKDE revision, with job lists, results, logs, and table scripts: see [`tkde_r2/`](tkde_r2/README.md).
 
 # Dependencies
 Fredformer is built based on PyTorch.

@@ -1,0 +1,9 @@
+tag,data_path,horizon,seed,mode,extra
+main,traffic.csv,96,2022,direct,
+main,traffic.csv,96,2023,direct,
+main,traffic.csv,192,2022,direct,
+main,traffic.csv,192,2023,direct,
+main,traffic.csv,336,2022,direct,
+main,traffic.csv,336,2023,direct,
+main,traffic.csv,720,2022,direct,
+main,traffic.csv,720,2023,direct,

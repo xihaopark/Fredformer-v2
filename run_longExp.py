@@ -7,12 +7,6 @@ import numpy as np
 
 num_gpus = torch.cuda.device_count()
 
-if num_gpus >= 3:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
-elif num_gpus >= 2:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
-else:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"  
 parser = argparse.ArgumentParser(description='Autoformer & Transformer family for Time Series Forecasting')
 
 #Fredformer:
@@ -26,8 +20,28 @@ parser.add_argument('--cf_head_dim',    type=int, default=32)   #dimension for s
 parser.add_argument('--cf_weight_decay',type=float, default=0)  #weight_decay
 parser.add_argument('--cf_p',           type=int, default=1)    #patch_type
 parser.add_argument('--use_nys',           type=int, default=0)    #use nystrom
+parser.add_argument('--num_landmarks',     type=int, default=64)   #number of landmarks for nystrom
+parser.add_argument('--pinv_iterations',   type=int, default=6)    #pseudo-inverse iterations
+parser.add_argument('--eps',               type=float, default=1e-6) #epsilon for numerical stability
 parser.add_argument('--mlp_drop',           type=float, default=0.3)    #output type
 parser.add_argument('--ablation',       type=int, default=0)    #ablation study 012.
+
+# Frequency domain filter
+parser.add_argument('--use_freq_filter', action='store_true', help='是否使用频率域滤波器')
+
+# KRL (Kernelized Reweighting Layer) parameters
+parser.add_argument('--krl_hidden_dim', type=int, default=128, help='hidden dimension for KRL (Kernelized Reweighting Layer)')
+parser.add_argument('--disable_cv_weighting', action='store_true',
+                    help='disable FredNormer CV weighting for ablation runs')
+parser.add_argument('--cv_weighting_mode', type=str, default='direct',
+                    choices=['direct', 'inverse', 'norm_inverse', 'shuffled', 'constant', 'learned_mask', 'monotone'],
+                    help='FredNormer/CV weighting transform: direct keeps current CV weights; inverse and norm_inverse are sensitivity variants; shuffled/constant/learned_mask/monotone are R2 control variants')
+parser.add_argument('--norm_plugin', type=str, default='none', choices=['none', 'fan', 'san'],
+                    help='competing plug-in normalizer wrapped around the backbone (R2 robustness comparison)')
+parser.add_argument('--fan_topk', type=int, default=20, help='FAN: number of dominant frequencies')
+parser.add_argument('--san_period', type=int, default=24, help='SAN: slice length')
+parser.add_argument('--disable_channel_attention', action='store_true',
+                    help='disable cross-channel attention and keep per-channel feed-forward blocks')
 
 # random seed
 parser.add_argument('--random_seed', type=int, default=2021, help='random seed')
@@ -113,6 +127,8 @@ parser.add_argument('--gpu', type=int, default=0, help='gpu')
 parser.add_argument('--use_multi_gpu',type =bool, help='use multiple gpus', default=False)
 parser.add_argument('--devices', type=str, default='0,1,2', help='device ids of multile gpus')
 parser.add_argument('--test_flop', action='store_true', default=False, help='See utils/tools for usage')
+parser.add_argument('--skip_save_arrays', action='store_true', default=False,
+                    help='skip saving pred/true/x npy arrays during test; result metrics are still written')
 
 args = parser.parse_args()
 
@@ -185,6 +201,5 @@ else:
 
     exp = Exp(args)  # set experiments
     print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
-    exp.test(setting, test=1)
+    exp.test(setting, test=1, args=args)
     torch.cuda.empty_cache()
-

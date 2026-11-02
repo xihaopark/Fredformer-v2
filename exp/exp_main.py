@@ -17,23 +17,25 @@ import time
 import warnings
 import matplotlib.pyplot as plt
 import numpy as np
+from normer.frequency_domain_filter import run_filter
 
 from exp.ContrastiveLoss import SupConLoss,swavloss,NTXentLoss
 from exp.Regularization  import Regularization
 #from torchvision.models import densenet121
+
 from torchinfo import summary
 from thop import profile
 from thop import clever_format
 
 
-num_gpus = torch.cuda.device_count()
+# num_gpus = torch.cuda.device_count()
 
-if num_gpus >= 3:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
-elif num_gpus >= 2:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
-else:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# if num_gpus >= 3:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
+# elif num_gpus >= 2:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
+# else:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 warnings.filterwarnings('ignore')
 
 
@@ -42,21 +44,41 @@ class Exp_Main(Exp_Basic):
     def __init__(self, args):
         super(Exp_Main, self).__init__(args)
 
+    def _compute_global_mask(self):
+        train_data, train_loader = self._get_data(flag='train')
+        self.global_mask = run_filter(self.args, train_loader)
+
     def _build_model(self):
         model_dict = {
             'Fredformer': Fredformer,
         }
-        model = model_dict[self.args.model].Model(self.args).float()
-
-        if self.args.use_multi_gpu and self.args.use_gpu:
-            model = nn.DataParallel(model, device_ids=self.args.device_ids)
-
+        self.global_mask = None
+        self._compute_global_mask()
+        print("global mask done!!")
+        self.global_mask = self.global_mask.to(self.device)
+        
+        # Add frequency filter support
+        if hasattr(self.args, 'use_freq_filter') and self.args.use_freq_filter:
+            print("Computing frequency domain filter...")
+            from layers.frequency_filter import run_filter
+            # Get training data for filter computation
+            train_data, train_loader = self._get_data(flag='train')
+            global_mask_amp = run_filter(self.args, train_loader)
+            self.args.global_mask_amp = global_mask_amp
+            print("Frequency domain filter computed!")
+        else:
+            self.args.global_mask_amp = None
+        
+        model = model_dict[self.args.model].Model(self.args, self.global_mask).float()
+        #if self.args.use_multi_gpu and self.args.use_gpu:
+        #    model = nn.DataParallel(model, device_ids=self.args.device_ids)
+        model.model.to(self.device)
         #summary(model, input_size=(self.args.batch_size, 336, self.args.enc_in), device="cuda", verbose=2, depth=2)
-        inputs= torch.randn(self.args.batch_size, self.args.seq_len, self.args.enc_in)
-        flops, macs = profile(model, inputs=(inputs,), verbose=False)
+        #inputs= torch.randn(self.args.batch_size, self.args.seq_len, self.args.enc_in)
+        #flops, macs = profile(model, inputs=(inputs,), verbose=False)
 
-        flops, macs = clever_format([flops, macs], "%.3f")
-        print(f"FLOPS: {flops}, MACs: {macs}")
+        #flops, macs = clever_format([flops, macs], "%.3f")
+        #print(f"FLOPS: {flops}, MACs: {macs}")
 
         return model
 
@@ -99,6 +121,7 @@ class Exp_Main(Exp_Basic):
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.device)
                 self.select_regularization()
+                
                 # encoder - decoder
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
@@ -117,6 +140,7 @@ class Exp_Main(Exp_Basic):
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
                         else:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                            
                 f_dim = -1 if self.args.features == 'MS' else 0
                 outputs = outputs[:, -self.args.pred_len:, f_dim:]
                 batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
@@ -147,6 +171,7 @@ class Exp_Main(Exp_Basic):
                 # decoder input
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.device)
+                
                 # encoder - decoder
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
@@ -165,6 +190,7 @@ class Exp_Main(Exp_Basic):
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
                         else:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+
                 f_dim = -1 if self.args.features == 'MS' else 0
                 outputs = outputs[:, -self.args.pred_len:, f_dim:]
                 batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
@@ -181,7 +207,6 @@ class Exp_Main(Exp_Basic):
         return total_loss
 
     def train(self, setting,args):
-        
         train_data, train_loader = self._get_data(flag='train')
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
@@ -197,6 +222,40 @@ class Exp_Main(Exp_Basic):
 
         model_optim = self._select_optimizer()
         criterion,criterion2 = self._select_criterion()
+        
+        # Pre-compute CV statistics for FredNormer weighting unless running ablation.
+        if getattr(self.args, 'disable_cv_weighting', False):
+            print("FredNormer weighting disabled for ablation.")
+            self.model.cv_statistics = None
+        else:
+            print("Computing CV statistics for FredNormer weighting...")
+            cv_statistics = self.model.compute_cv_statistics(train_loader, self.device)
+            cv_weighting_mode = getattr(self.args, 'cv_weighting_mode', 'direct')
+            if cv_weighting_mode == 'inverse':
+                cv_statistics = 1.0 / (cv_statistics + 1e-6)
+                print("Using inverse CV weighting sensitivity mode.")
+            elif cv_weighting_mode == 'norm_inverse':
+                cv_statistics = 1.0 / (cv_statistics + 1e-6)
+                cv_statistics = cv_statistics / torch.clamp(torch.mean(cv_statistics), min=1e-6)
+                print("Using mean-normalized inverse CV weighting sensitivity mode.")
+            elif cv_weighting_mode == 'shuffled':
+                # Randomly permute CV across positive-frequency bins (DC kept), then mirror
+                n = cv_statistics.shape[0]
+                half = cv_statistics[:n // 2 + 1].clone()
+                gen = torch.Generator().manual_seed(int(self.args.random_seed))
+                perm = torch.randperm(half.shape[0] - 1, generator=gen) + 1
+                half[1:] = half[perm.to(half.device)]
+                cv_statistics = self.model.mirror_half_spectrum(half, n)
+                print("Using shuffled CV control mode.")
+            elif cv_weighting_mode == 'constant':
+                cv_statistics = torch.full_like(cv_statistics, torch.mean(cv_statistics).item())
+                print("Using constant (mean CV) control mode.")
+            elif cv_weighting_mode in ('learned_mask', 'monotone'):
+                print(f"Using {cv_weighting_mode} control mode.")
+            elif cv_weighting_mode != 'direct':
+                raise ValueError(f"unsupported cv_weighting_mode: {cv_weighting_mode}")
+            self.model.cv_statistics = cv_statistics
+            print(f"CV statistics computed: shape {cv_statistics.shape}")
         
         if self.args.use_amp:
             scaler = torch.cuda.amp.GradScaler()
@@ -226,11 +285,12 @@ class Exp_Main(Exp_Basic):
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.device)
                 self.select_regularization()
+                
                 # encoder - decoder
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
                         if 'Linear' in self.args.model or 'F' in self.args.model:
-                            outputs = self.model(batch_x)
+                            outputs = self.model(batch_x, self.model.cv_statistics)
                         else:
                             if self.args.output_attention:
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
@@ -244,18 +304,19 @@ class Exp_Main(Exp_Basic):
                         train_loss.append(loss.item())
                 else:
                     if 'Linear' in self.args.model or 'F' in self.args.model:
-                            outputs = self.model(batch_x)
+                        outputs = self.model(batch_x, self.model.cv_statistics)
                     else:
                         if self.args.output_attention:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
-                            
                         else:
-                            outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark, batch_y)
-                    # print(outputs.shape,batch_y.shape)
+                            outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+                    
                     f_dim = -1 if self.args.features == 'MS' else 0
                     outputs = outputs[:, -self.args.pred_len:, f_dim:]
                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
                     loss = criterion(outputs, batch_y)
+                    if getattr(self.model, 'norm_plugin', None) is not None:
+                        loss = loss + self.model.norm_plugin.loss(batch_y)
                     
                     if self.weight_decay > 0:
                         loss = loss + 0.01 * self.reg_loss(self.model)
@@ -297,7 +358,6 @@ class Exp_Main(Exp_Basic):
             else:
                 print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
 
-
         best_model_path = path + '/' + 'checkpoint.pth'
         self.model.load_state_dict(torch.load(best_model_path))
 
@@ -314,6 +374,12 @@ class Exp_Main(Exp_Basic):
         
         trues = []
         inputx = []
+        stream_metrics = getattr(self.args, 'skip_save_arrays', False)
+        stream_abs = 0.0
+        stream_sq = 0.0
+        stream_count = 0
+        stream_true_sum = 0.0
+        stream_true_sq_sum = 0.0
         folder_path = './test_results/' + setting + '/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
@@ -330,11 +396,12 @@ class Exp_Main(Exp_Basic):
                 # decoder input
                 dec_inp = torch.zeros_like(batch_y[:, -self.args.pred_len:, :]).float()
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.device)
+                
                 # encoder - decoder
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
                         if 'Linear' in self.args.model or 'F' in self.args.model:
-                            outputs = self.model(batch_x)
+                            outputs = self.model(batch_x, self.model.cv_statistics)
                         else:
                             if self.args.output_attention:
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
@@ -342,11 +409,10 @@ class Exp_Main(Exp_Basic):
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 else:
                     if 'Linear' in self.args.model or 'F' in self.args.model:
-                            outputs = self.model(batch_x)
+                        outputs = self.model(batch_x, self.model.cv_statistics)
                     else:
                         if self.args.output_attention:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
-
                         else:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
 
@@ -361,28 +427,44 @@ class Exp_Main(Exp_Basic):
                 pred = outputs  
                 true = batch_y  
 
-                preds.append(pred)
-                trues.append(true)
-                inputx.append(batch_x.detach().cpu().numpy())
+                if stream_metrics:
+                    diff = pred - true
+                    stream_abs += np.abs(diff).sum(dtype=np.float64)
+                    stream_sq += np.square(diff).sum(dtype=np.float64)
+                    stream_count += diff.size
+                    stream_true_sum += true.sum(dtype=np.float64)
+                    stream_true_sq_sum += np.square(true).sum(dtype=np.float64)
+                else:
+                    preds.append(pred)
+                    trues.append(true)
+                    inputx.append(batch_x.detach().cpu().numpy())
 
         if self.args.test_flop:
-            test_params_flop((batch_x.shape[1],batch_x.shape[2]))
+            test_params_flop(self.model, (batch_x.shape[1],batch_x.shape[2]))
             exit()
-        preds = np.array(preds)
-        
-        trues = np.array(trues)
-        inputx = np.array(inputx)
-        preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
-        
-        trues = trues.reshape(-1, trues.shape[-2], trues.shape[-1])
-        inputx = inputx.reshape(-1, inputx.shape[-2], inputx.shape[-1])
-
         # result save
         folder_path = './results/' + setting + '/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        mae, mse, rmse, mape, mspe, rse, corr = metric(preds, trues)
+        if stream_metrics:
+            mae = stream_abs / stream_count
+            mse = stream_sq / stream_count
+            denom = stream_true_sq_sum - (stream_true_sum * stream_true_sum / stream_count)
+            rse = np.sqrt(stream_sq) / np.sqrt(max(denom, 1e-12))
+            rmse = np.sqrt(mse)
+            mape = mspe = corr = np.nan
+        else:
+            preds = np.array(preds)
+            
+            trues = np.array(trues)
+            inputx = np.array(inputx)
+            preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
+            
+            trues = trues.reshape(-1, trues.shape[-2], trues.shape[-1])
+            inputx = inputx.reshape(-1, inputx.shape[-2], inputx.shape[-1])
+            mae, mse, rmse, mape, mspe, rse, corr = metric(preds, trues)
+
         print('mse:{}, mae:{}, rse:{}'.format(mse, mae, rse))
         save_file = "result_" + str(args.data_path) +".txt"
         f = open(save_file, 'a')
@@ -393,9 +475,10 @@ class Exp_Main(Exp_Basic):
         f.close()
 
         #np.save(folder_path + 'metrics.npy', np.array([mae, mse, rmse, mape, mspe,rse, corr]))
-        np.save(folder_path + 'pred.npy', preds)
-        np.save(folder_path + 'true.npy', trues)
-        np.save(folder_path + 'x.npy', inputx)
+        if not stream_metrics:
+            np.save(folder_path + 'pred.npy', preds)
+            np.save(folder_path + 'true.npy', trues)
+            np.save(folder_path + 'x.npy', inputx)
         return
 
     def predict(self, setting, load=False):
@@ -419,11 +502,12 @@ class Exp_Main(Exp_Basic):
                 # decoder input
                 dec_inp = torch.zeros([batch_y.shape[0], self.args.pred_len, batch_y.shape[2]]).float().to(batch_y.device)
                 dec_inp = torch.cat([batch_y[:, :self.args.label_len, :], dec_inp], dim=1).float().to(self.device)
+                
                 # encoder - decoder
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
                         if 'Linear' in self.args.model or 'F' in self.args.model:
-                            outputs = self.model(batch_x)
+                            outputs = self.model(batch_x, self.model.cv_statistics)
                         else:
                             if self.args.output_attention:
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
@@ -431,7 +515,7 @@ class Exp_Main(Exp_Basic):
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 else:
                     if 'Linear' in self.args.model or 'F' in self.args.model:
-                        outputs = self.model(batch_x)
+                        outputs = self.model(batch_x, self.model.cv_statistics)
                     else:
                         if self.args.output_attention:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]

@@ -15,10 +15,14 @@ class Exp_Basic(object):
 
     def _acquire_device(self):
         if self.args.use_gpu:
-            os.environ["CUDA_VISIBLE_DEVICES"] = str(
-                self.args.gpu) if not self.args.use_multi_gpu else self.args.devices
-            device = torch.device('cuda:{}'.format(self.args.gpu))
-            print('Use GPU: cuda:{}'.format(self.args.gpu))
+            # 只有在没有外部设置CUDA_VISIBLE_DEVICES时才设置
+            if 'CUDA_VISIBLE_DEVICES' not in os.environ:
+                os.environ["CUDA_VISIBLE_DEVICES"] = str(
+                    self.args.gpu) if not self.args.use_multi_gpu else self.args.devices
+            
+            # 使用第一个可见的GPU
+            device = torch.device('cuda:0')
+            print(f'Use GPU: cuda:0 (CUDA_VISIBLE_DEVICES={os.environ.get("CUDA_VISIBLE_DEVICES", "Not set")})')
         else:
             device = torch.device('cpu')
             print('Use CPU')

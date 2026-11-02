@@ -1,0 +1,158 @@
+diff --git a/data_provider/data_factory.py b/data_provider/data_factory.py
+index 7fc458f..45bb9ec 100644
+--- a/data_provider/data_factory.py
++++ b/data_provider/data_factory.py
+@@ -1,4 +1,4 @@
+-from data_provider.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_M4, PSMSegLoader, \
++from data_provider.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Solar, Dataset_M4, PSMSegLoader, \
+     MSLSegLoader, SMAPSegLoader, SMDSegLoader, SWATSegLoader, UEAloader
+ from data_provider.uea import collate_fn
+ from torch.utils.data import DataLoader
+@@ -9,6 +9,7 @@ data_dict = {
+     'ETTm1': Dataset_ETT_minute,
+     'ETTm2': Dataset_ETT_minute,
+     'custom': Dataset_Custom,
++    'Solar': Dataset_Solar,
+     'm4': Dataset_M4,
+     'PSM': PSMSegLoader,
+     'MSL': MSLSegLoader,
+diff --git a/data_provider/data_loader.py b/data_provider/data_loader.py
+index ea28fdc..f79e602 100644
+--- a/data_provider/data_loader.py
++++ b/data_provider/data_loader.py
+@@ -848,3 +848,49 @@ class UEAloader(Dataset):
+ 
+     def __len__(self):
+         return len(self.all_IDs)
++
++
++class Dataset_Solar(Dataset):
++    """Solar-Energy (no timestamps); 70/10/20 split and zero time marks, as in iTransformer."""
++
++    def __init__(self, args, root_path, flag='train', size=None,
++                 features='S', data_path='Solar.csv',
++                 target='OT', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
++        self.args = args
++        self.seq_len, self.label_len, self.pred_len = size
++        self.set_type = {'train': 0, 'val': 1, 'test': 2}[flag]
++        self.scale = scale
++        self.root_path = root_path
++        self.data_path = data_path
++        self.__read_data__()
++
++    def __read_data__(self):
++        self.scaler = StandardScaler()
++        df_raw = pd.read_csv(os.path.join(self.root_path, self.data_path), header=None).values.astype(np.float64)
++        num_train = int(len(df_raw) * 0.7)
++        num_test = int(len(df_raw) * 0.2)
++        num_valid = int(len(df_raw) * 0.1)
++        border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
++        border2s = [num_train, num_train + num_valid, len(df_raw)]
++        border1, border2 = border1s[self.set_type], border2s[self.set_type]
++        if self.scale:
++            self.scaler.fit(df_raw[border1s[0]:border2s[0]])
++            data = self.scaler.transform(df_raw)
++        else:
++            data = df_raw
++        self.data_x = data[border1:border2]
++        self.data_y = data[border1:border2]
++
++    def __getitem__(self, index):
++        s_end = index + self.seq_len
++        r_begin = s_end - self.label_len
++        r_end = r_begin + self.label_len + self.pred_len
++        seq_x = self.data_x[index:s_end]
++        seq_y = self.data_y[r_begin:r_end]
++        return seq_x, seq_y, torch.zeros((seq_x.shape[0], 1)), torch.zeros((seq_y.shape[0], 1))
++
++    def __len__(self):
++        return len(self.data_x) - self.seq_len - self.pred_len + 1
++
++    def inverse_transform(self, data):
++        return self.scaler.inverse_transform(data)
+diff --git a/exp/exp_long_term_forecasting.py b/exp/exp_long_term_forecasting.py
+index 5c1d282..98c4059 100644
+--- a/exp/exp_long_term_forecasting.py
++++ b/exp/exp_long_term_forecasting.py
+@@ -31,6 +31,13 @@ class Exp_Long_Term_Forecast(Exp_Basic):
+         return data_set, data_loader
+ 
+     def _select_optimizer(self):
++        if hasattr(self.model, 'fan'):
++            # FAN's official setting: its own parameters use lr 3e-4 and weight decay 5e-4
++            fan_params = list(self.model.fan.parameters())
++            fan_ids = {id(p) for p in fan_params}
++            rest = [p for p in self.model.parameters() if id(p) not in fan_ids]
++            return optim.Adam([{'params': rest, 'lr': self.args.learning_rate},
++                               {'params': fan_params, 'lr': 3e-4, 'weight_decay': 5e-4}])
+         model_optim = optim.Adam(self.model.parameters(), lr=self.args.learning_rate)
+         return model_optim
+ 
+@@ -87,6 +94,15 @@ class Exp_Long_Term_Forecast(Exp_Basic):
+         train_steps = len(train_loader)
+         early_stopping = EarlyStopping(patience=self.args.patience, verbose=True)
+ 
++        if getattr(self.args, 'cv_plugin', 0):
++            from layers.cv_plugin import CVPlugin, compute_cv
++            self.model = CVPlugin(self.model, compute_cv(train_loader, self.device)).to(self.device)
++            print('FredNormer CV plug-in enabled')
++        if getattr(self.args, 'fan_plugin', 0):
++            from layers.cv_plugin import FANPlugin
++            self.model = FANPlugin(self.model, self.args.seq_len, self.args.pred_len, self.args.enc_in, getattr(self.args, 'fan_topk', 20)).to(self.device)
++            print('FAN plug-in enabled')
++
+         model_optim = self._select_optimizer()
+         criterion = self._select_criterion()
+ 
+@@ -128,6 +144,12 @@ class Exp_Long_Term_Forecast(Exp_Basic):
+                     outputs = outputs[:, -self.args.pred_len:, f_dim:]
+                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
+                     loss = criterion(outputs, batch_y)
++                    alpha = getattr(self.args, 'fredf_alpha', 0.0)
++                    if alpha > 0:  # FreDF (Wang et al., ICLR 2025): blend with a frequency-domain L1 loss
++                        freq_loss = (torch.fft.rfft(outputs, dim=1) - torch.fft.rfft(batch_y, dim=1)).abs().mean()
++                        loss = (1 - alpha) * loss + alpha * freq_loss
++                    if hasattr(self.model, 'aux_loss'):
++                        loss = loss + self.model.aux_loss(batch_y)
+                     train_loss.append(loss.item())
+ 
+                 if (i + 1) % 100 == 0:
+diff --git a/run.py b/run.py
+index 9fe7530..0385f90 100644
+--- a/run.py
++++ b/run.py
+@@ -7,7 +7,7 @@ import random
+ import numpy as np
+ 
+ if __name__ == '__main__':
+-    fix_seed = 2021
++    fix_seed = int(os.environ.get("TKDE_SEED", "2021"))
+     random.seed(fix_seed)
+     torch.manual_seed(fix_seed)
+     np.random.seed(fix_seed)
+@@ -17,6 +17,10 @@ if __name__ == '__main__':
+     # basic config
+     parser.add_argument('--task_name', type=str, required=True, default='long_term_forecast',
+                         help='task name, options:[long_term_forecast, short_term_forecast, imputation, classification, anomaly_detection]')
++    parser.add_argument('--cv_plugin', type=int, default=0, help='TKDE R2: apply FredNormer CV weighting as a plug-in')
++    parser.add_argument('--fan_topk', type=int, default=20, help='TKDE R2: FAN top-k frequencies')
++    parser.add_argument('--fan_plugin', type=int, default=0, help='TKDE R2: wrap backbone with FAN')
++    parser.add_argument('--fredf_alpha', type=float, default=0.0, help='TKDE R2: FreDF frequency-loss weight')
+     parser.add_argument('--is_training', type=int, required=True, default=1, help='status')
+     parser.add_argument('--model_id', type=str, required=True, default='test', help='model id')
+     parser.add_argument('--model', type=str, required=True, default='Autoformer',
+diff --git a/utils/tools.py b/utils/tools.py
+index 08b4f5a..dc56abf 100644
+--- a/utils/tools.py
++++ b/utils/tools.py
+@@ -25,7 +25,9 @@ def adjust_learning_rate(optimizer, epoch, args):
+     if epoch in lr_adjust.keys():
+         lr = lr_adjust[epoch]
+         for param_group in optimizer.param_groups:
+-            param_group['lr'] = lr
++            # keep per-group learning-rate ratios (e.g. FAN's own lr) under the schedule
++            base = param_group.setdefault('base_lr', param_group['lr'] if epoch <= 1 else args.learning_rate)
++            param_group['lr'] = lr * base / args.learning_rate
+         print('Updating learning rate to {}'.format(lr))
+ 
+ 

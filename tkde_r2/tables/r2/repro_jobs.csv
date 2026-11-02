@@ -1,0 +1,8 @@
+tag,data_path,horizon,seed,mode,extra
+repro,ETTh2.csv,96,2021,direct,
+repro,ETTh2.csv,96,2021,none,
+repro,ETTh2.csv,96,2021,inverse,
+repro,ETTh2.csv,96,2021,shuffled,
+repro,ETTh2.csv,96,2021,constant,
+repro,ETTh2.csv,96,2021,learned_mask,
+repro,ETTh2.csv,96,2021,monotone,

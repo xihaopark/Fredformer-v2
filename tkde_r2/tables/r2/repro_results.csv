@@ -1,0 +1,8 @@
+tag,data_path,horizon,seed,mode,extra,mse,mae,seconds,log
+repro,ETTh2.csv,96,2021,direct,,0.29256637043897743,0.34493614938964556,30,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_direct_seed2021_20261101_194126.log
+repro,ETTh2.csv,96,2021,none,,0.29932849753970137,0.34721349852349903,30,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_none_seed2021_20261101_194126.log
+repro,ETTh2.csv,96,2021,inverse,,0.2976678241892197,0.3466665164097572,30,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_inverse_seed2021_20261101_194126.log
+repro,ETTh2.csv,96,2021,shuffled,,0.2930282079763331,0.34429719419258,30,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_shuffled_seed2021_20261101_194126.log
+repro,ETTh2.csv,96,2021,learned_mask,,0.2917048219754785,0.3440901596105541,30,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_learned_mask_seed2021_20261101_194126.log
+repro,ETTh2.csv,96,2021,monotone,,0.29272524153026414,0.3450155212984646,30,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_monotone_seed2021_20261101_194126.log
+repro,ETTh2.csv,96,2021,constant,,0.29175511821356376,0.34218543820735803,35,<tkde_r2>/logs/r2/r2_repro_ETTh2_96_96_constant_seed2021_20261101_194126.log

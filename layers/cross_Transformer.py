@@ -65,8 +65,9 @@ class c_Attention(nn.Module):
 
 
 class c_Transformer(nn.Module):           ##Register the blocks into whole network
-    def __init__(self, dim, depth, heads, dim_head, mlp_dim, dropout = 0.8):
+    def __init__(self, dim, depth, heads, dim_head, mlp_dim, dropout = 0.8, disable_channel_attention=False):
         super().__init__()
+        self.disable_channel_attention = disable_channel_attention
         self.layers = nn.ModuleList([])
         for _ in range(depth):
             self.layers.append(nn.ModuleList([
@@ -74,9 +75,11 @@ class c_Transformer(nn.Module):           ##Register the blocks into whole netwo
                 PreNorm(dim, FeedForward(dim, mlp_dim, dropout = dropout)) 
             ]))
     def forward(self, x):
-        for attn, ff in self.layers:
-            x_n,attn=attn(x)
-            x = x_n + x
+        attn = None
+        for attn_block, ff in self.layers:
+            if not self.disable_channel_attention:
+                x_n,attn=attn_block(x)
+                x = x_n + x
             x = ff(x) + x
         return x,attn
 
@@ -85,14 +88,16 @@ class c_Transformer(nn.Module):           ##Register the blocks into whole netwo
 
 
 class Trans_C(nn.Module):
-    def __init__(self, *, dim, depth, heads, mlp_dim, dim_head, dropout , patch_dim, horizon, d_model):
+    def __init__(self, *, dim, depth, heads, mlp_dim, dim_head, dropout , patch_dim, horizon, d_model,
+                 disable_channel_attention=False):
         super().__init__()
         
         self.dim = dim
         self.patch_dim = patch_dim
         self.to_patch_embedding = nn.Sequential(nn.Linear(patch_dim, dim),nn.Dropout(dropout))
         self.dropout = nn.Dropout(dropout)
-        self.transformer = c_Transformer(dim, depth, heads, dim_head, mlp_dim, dropout)
+        self.transformer = c_Transformer(dim, depth, heads, dim_head, mlp_dim, dropout,
+                                         disable_channel_attention=disable_channel_attention)
         
         self.mlp_head = nn.Linear(dim, d_model)#horizon)
         

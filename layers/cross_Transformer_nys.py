@@ -22,7 +22,6 @@ from sklearn.metrics import classification_report
 import itertools
 import random
 import tqdm
-from IPython.display import display, HTML
 import matplotlib.pyplot as plt
 from scipy import signal
 from scipy.fft import fftshift
@@ -175,14 +174,17 @@ class Attention(nn.Module):
 
 
 class Trans_C(nn.Module):
-    def __init__(self, *, dim, depth, heads, mlp_dim, dim_head, dropout , patch_dim, horizon, d_model):
+    def __init__(self, *, dim, depth, heads, mlp_dim, dim_head, dropout , patch_dim, horizon, d_model,
+                 num_landmarks=5, pinv_iterations=6, eps=1e-8, disable_channel_attention=False):
         super().__init__()
         
         self.dim = dim
         self.patch_dim = patch_dim
         self.to_patch_embedding = nn.Sequential(nn.Linear(patch_dim, dim),nn.Dropout(dropout))
         self.dropout = nn.Dropout(dropout)
-        self.transformer = Nystromformer(dim, depth, heads, dim_head, mlp_dim, num_landmarks=5,pinv_iterations = 6,eps=1e-8,dropout=dropout)
+        self.transformer = Nystromformer(dim, depth, heads, dim_head, mlp_dim, num_landmarks=num_landmarks,
+                                         pinv_iterations=pinv_iterations, eps=eps, dropout=dropout,
+                                         disable_channel_attention=disable_channel_attention)
         
         self.mlp_head = nn.Linear(dim, d_model)
 
@@ -198,8 +200,9 @@ class Trans_C(nn.Module):
 
 class Nystromformer(nn.Module):  ##Register the blocks into whole network
     def __init__(self, dim, depth, heads, dim_head, mlp_dim, num_landmarks,
-                 pinv_iterations, eps, dropout=0.5):
+                 pinv_iterations, eps, dropout=0.5, disable_channel_attention=False):
         super().__init__()
+        self.disable_channel_attention = disable_channel_attention
         self.layers = nn.ModuleList([])
         for _ in range(depth):
             self.layers.append(nn.ModuleList([
@@ -210,6 +213,7 @@ class Nystromformer(nn.Module):  ##Register the blocks into whole network
 
     def forward(self, x, mask=None):
         for attn, ff in self.layers:
-            x = attn(x, mask=mask) + x
+            if not self.disable_channel_attention:
+                x = attn(x, mask=mask) + x
             x = ff(x) + x
         return x
