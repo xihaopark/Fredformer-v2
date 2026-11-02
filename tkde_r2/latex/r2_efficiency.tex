@@ -1,0 +1,15 @@
+\begin{tabular}{llccccc}
+\toprule
+Data & Attention & Params (M) & Train (ms/step) & Train peak (GB) & Infer.\ peak (GB) & Infer.\ (samples/s) \\
+\midrule
+ECL & Full & 229.3 & 547 & 24.1 & 12.7 & 161 \\
+ECL & Nystr\"om, $\tilde m{=}8$ & 229.3 & 456 & 15.4 & 6.1 & 195 \\
+ECL & Nystr\"om, $\tilde m{=}32$ & 229.3 & 488 & 20.1 & 7.1 & 182 \\
+ECL & Nystr\"om, $\tilde m{=}64$ & 229.3 & 590 & 31.4 & 9.1 & 153 \\
+\midrule
+Traffic & Full & \multicolumn{5}{c}{out of memory (96 GB GPU)} \\
+Traffic & Nystr\"om, $\tilde m{=}8$ & 912.9 & 3960 & 67.7 & 23.8 & 21 \\
+Traffic & Nystr\"om, $\tilde m{=}32$ & 912.9 & 4017 & 74.6 & 25.8 & 21 \\
+Traffic & Nystr\"om, $\tilde m{=}64$ & 912.9 & 4125 & 89.4 & 29.1 & 20 \\
+\bottomrule
+\end{tabular}

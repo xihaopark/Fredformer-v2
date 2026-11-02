@@ -36,6 +36,16 @@ parser.add_argument('--disable_cv_weighting', action='store_true',
 parser.add_argument('--cv_weighting_mode', type=str, default='direct',
                     choices=['direct', 'inverse', 'norm_inverse', 'shuffled', 'constant', 'learned_mask', 'monotone'],
                     help='FredNormer/CV weighting transform: direct keeps current CV weights; inverse and norm_inverse are sensitivity variants; shuffled/constant/learned_mask/monotone are R2 control variants')
+parser.add_argument('--eval_only', action='store_true',
+                    help='R2: load the checkpoint of an identical training run and only run the test')
+parser.add_argument('--cv_reestimate_test', type=str, nargs='?', const='pooled', default='none',
+                    choices=['none', 'pooled', 'causal'],
+                    help='R2: re-estimate S(k) from test look-back windows (inputs only): pooled = all test windows at once; '
+                         'causal = running estimate updated with each batch before it is predicted')
+parser.add_argument('--fredf_alpha', type=float, default=0.0,
+                    help='R2: weight of the FreDF frequency-domain L1 loss (0 = plain MSE)')
+parser.add_argument('--cv_prior_windows', type=int, default=0,
+                    help='R2 causal online S(k): weight (in windows) of the training-split statistics used as prior; 0 = test windows only')
 parser.add_argument('--norm_plugin', type=str, default='none', choices=['none', 'fan', 'san'],
                     help='competing plug-in normalizer wrapped around the backbone (R2 robustness comparison)')
 parser.add_argument('--fan_topk', type=int, default=20, help='FAN: number of dominant frequencies')
@@ -152,7 +162,15 @@ print(args)
 
 Exp = Exp_Main
 
-if args.is_training:
+if args.is_training and args.eval_only:
+    setting = '{}_{}_{}_cf_dim{}_cf_depth{}_cf_heads{}_cf_mlp{}_cf_head_dim{}_{}'.format(
+        args.model_id, args.model, args.data_path, args.cf_dim, args.cf_depth, args.cf_heads,
+        args.cf_mlp, args.cf_head_dim, args.train_epochs, 0)
+    exp = Exp(args)
+    print('>>>>>>>eval-only testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
+    exp.test(setting, args, test=1)
+    torch.cuda.empty_cache()
+elif args.is_training:
     for ii in range(args.itr):
         # setting record of experiments
         setting = '{}_{}_{}_cf_dim{}_cf_depth{}_cf_heads{}_cf_mlp{}_cf_head_dim{}_{}'.format(

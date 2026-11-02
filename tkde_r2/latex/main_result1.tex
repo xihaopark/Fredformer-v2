@@ -1,0 +1,76 @@
+% \begin{table*}[htpb]
+% \renewcommand\arraystretch{1}
+%     \centering
+%     \setlength{\abovecaptionskip}{0.cm}
+%     \caption{Multivariate forecasting results with prediction lengths $H\in\{96, 192, 336, 720\}$ and fixed look-back length $L=96$. Results are averaged over all prediction lengths. \method (Ours) is the mean over five seeds (three for Solar and Traffic), using validation-selected configurations for ETT and Weather and the reference configurations otherwise; ``Ours + FreDF loss'': \method trained with the FreDF loss (reference configurations, three seeds, Traffic not run); FAN and FreDF are applied to iTransformer and averaged over three seeds; other baselines are the published results under the same protocol~\cite{liu2023itransformer}. Best results are in \textbf{bold} and second-best are \underline{underlined}.}
+%     \label{tab:main_result}
+%     \scalebox{0.81}{
+%     \begin{tabular}{cc|cc|cc|cc|cc|cc|cc|cc|ccc}
+%       \toprule
+%       \midrule
+%       \multirow{2}*{\textbf{Methods}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Note}}} & \multicolumn{2}{c}{\textbf{ECL}} & \multicolumn{2}{c}{\textbf{ETTh1}} & \multicolumn{2}{c}{\textbf{ETTh2}} & \multicolumn{2}{c}{\textbf{ETTm1}} & \multicolumn{2}{c}{\textbf{ETTm2}} & \multicolumn{2}{c}{\textbf{Traffic}} & \multicolumn{2}{c}{\textbf{Weather}} & \multicolumn{2}{c}{\textbf{Solar}} \\ 
+%       \cmidrule(r){3-4} \cmidrule(r){5-6} \cmidrule(r){7-8} \cmidrule(r){9-10}\cmidrule(r){11-12}\cmidrule(r){13-14}\cmidrule(r){15-16}\cmidrule(r){17-18}
+%       &  & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & \\
+      
+%        \hline
+%     \midrule
+%         iTransformer  & \multirow{7}*{\makecell{Trans\\-former\\-based}} & \cellcolor{myBG}\textbf{0.178}  & \cellcolor{myBG}\textbf{0.270}  & 0.454  & 0.447  & 0.383  & 0.407  & 0.407  & 0.410  & 0.288  & 0.332  & \underline{{0.428}}  & \underline{{0.282}}  & \cellcolor{myBG}\textbf{0.258}  & \cellcolor{myBG}\textbf{0.279}  & \cellcolor{myBG}\textbf{0.233}  & \cellcolor{myBG}\textbf{0.262}  & \\
+%         PatchTST & & 0.216  & 0.304  & 0.469  & 0.454  & 0.387  & 0.407  & \cellcolor{myBG}\textbf{0.387}  & \cellcolor{myBG}\textbf{0.400}  & \cellcolor{myBG}\textbf{0.281}  & \cellcolor{myBG}\textbf{0.326}  & 0.555  & 0.362  & 0.259  & 0.281  & 0.270  & 0.307  & \\
+%         Crossformer  & & 0.244  & 0.334  & 0.529  & 0.522  & 0.942  & 0.684  & 0.513  & 0.496  & 0.757  & 0.610  & 0.550  & 0.304  & 0.259  & 0.315  & 0.641  & 0.639  & \\
+%         TimesNet   & & 0.192  & 0.295  & 0.548  & 0.450  & 0.414  & 0.427  & 0.400  & 0.406  & 0.291  & 0.333  & 0.620  & 0.336  & 0.259  & 0.287  & 0.301  & 0.319  & \\
+%         FEDformer  & & 0.214  & 0.327  & \cellcolor{myBG}\textbf{0.440}  & 0.460  & 0.437  & 0.449  & 0.448  & 0.452  & 0.305  & 0.349  & 0.610  & 0.376  & 0.309  & 0.360  & 0.291  & 0.381  & \\
+%         Autoformer & & 0.227  & 0.338  & 0.496  & 0.487  & 0.450  & 0.459  & 0.588  & 0.517  & 0.327  & 0.371  & 0.628  & 0.379  & 0.338  & 0.382  & 0.885  & 0.711  & \\
+%         \textbf{Ours} &  & \underline{{0.175}}  & \underline{{0.269}}  & \underline{{0.435}}  & \underline{{0.426}}  & \underline{{0.365}}  & \underline{{0.393}}  & \underline{{0.384}}  & \underline{{0.395}}  & \underline{{0.279}}  & \underline{{0.324}}  & \cellcolor{myBG}\textbf{0.431}  & \cellcolor{myBG}\textbf{0.287}  & \underline{{0.246}}  & \underline{{0.272}}  & \underline{{0.226}}  & \underline{{0.261}}  & \\
+%         \cmidrule(r){1-18}
+%         RLinear & \multirow{3}*{\makecell{Linear\\-based}} & 0.219  & 0.298  & 0.446  & \cellcolor{myBG}\textbf{0.434}  & \cellcolor{myBG}\textbf{0.374}  & \cellcolor{myBG}\textbf{0.398}  & 0.414  & 0.407  & 0.286  & 0.327  & 0.626  & 0.378  & 0.272  & 0.291  & 0.369  & 0.356  & \\
+%         TiDE  & & 0.251  & 0.344  & 0.541  & 0.507  & 0.611  & 0.550  & 0.419  & 0.419  & 0.358  & 0.404  & 0.760  & 0.473  & 0.271  & 0.320  & 0.347  & 0.417  & \\
+%         DLinear  & & 0.212  & 0.300  & 0.456  & 0.452  & 0.559  & 0.515  & 0.403  & 0.407  & 0.350  & 0.401  & 0.625  & 0.383  & 0.265  & 0.317  & 0.330  & 0.401  & \\
+%         \cmidrule(r){1-18}
+%         SCINet  & \multirow{2}*{\makecell{Others}} & 0.268  & 0.365  & 0.747  & 0.647  & 0.954  & 0.723  & 0.485  & 0.481  & 0.571  & 0.537  & 0.804  & 0.509  & 0.292  & 0.363  & 0.282  & 0.375  & \\
+%         Stationary  & & 0.193  & 0.296  & 0.570  & 0.537  & 0.526  & 0.516  & 0.481  & 0.456  & 0.306  & 0.347  & 0.624  & 0.340  & 0.288  & 0.314  & 0.261  & 0.381  & \\
+
+%     \bottomrule
+%   \end{tabular}
+%   }
+% \end{table*}
+
+
+
+\begin{table*}[ht]
+\renewcommand\arraystretch{1}
+    \centering
+    \setlength{\abovecaptionskip}{0.cm}
+    \caption{Multivariate forecasting results with prediction lengths $H\in\{96, 192, 336, 720\}$ and fixed look-back length $L=96$. Results are averaged over all prediction lengths. \method (Ours) is the mean over five seeds (three for Solar and Traffic), using validation-selected configurations for ETT and Weather and the reference configurations otherwise; ``Ours + FreDF loss'': \method trained with the FreDF loss (reference configurations, three seeds, Traffic not run); FAN and FreDF are applied to iTransformer and averaged over three seeds; other baselines are the published results under the same protocol~\cite{liu2023itransformer}. Best results are in \textbf{bold} and second-best are \underline{underlined}.}
+    \label{tab:main_result}
+    \scalebox{0.755}{
+    \begin{tabular}{cc|cc|cc|cc|cc|cc|cc|cc|ccc}
+      \toprule
+      % \midrule
+      \multirow{2}*{\textbf{Methods}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Type}}} & \multicolumn{2}{c}{\textbf{ECL}} & \multicolumn{2}{c}{\textbf{ETTh1}} & \multicolumn{2}{c}{\textbf{ETTh2}} & \multicolumn{2}{c}{\textbf{ETTm1}} & \multicolumn{2}{c}{\textbf{ETTm2}} & \multicolumn{2}{c}{\textbf{Traffic}} & \multicolumn{2}{c}{\textbf{Weather}} & \multicolumn{2}{c}{\textbf{Solar}} \\ 
+      \cmidrule(r){3-4} \cmidrule(r){5-6} \cmidrule(r){7-8} \cmidrule(r){9-10}\cmidrule(r){11-12}\cmidrule(r){13-14}\cmidrule(r){15-16}\cmidrule(r){17-18}
+      &  & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & \\
+      
+       \hline
+    \midrule
+        iTransformer & \multirow{10}*{\makecell{Trans\\-former\\-based}} & 0.178 & 0.270 & 0.454 & 0.447 & 0.383 & 0.407 & 0.407 & 0.410 & 0.288 & 0.332 & \underline{0.428} & \underline{0.282} & 0.258 & \textbf{0.279} & \underline{0.233} & 0.262 & \\
+        PatchTST &  & 0.216 & 0.304 & 0.469 & 0.454 & 0.387 & 0.407 & 0.387 & 0.400 & 0.281 & 0.326 & 0.555 & 0.362 & 0.259 & 0.281 & 0.270 & 0.307 & \\
+        Crossformer &  & 0.244 & 0.334 & 0.529 & 0.522 & 0.942 & 0.684 & 0.513 & 0.496 & 0.757 & 0.610 & 0.550 & 0.304 & 0.259 & 0.315 & 0.641 & 0.639 & \\
+        TimesNet &  & 0.192 & 0.295 & 0.548 & 0.450 & 0.414 & 0.427 & 0.400 & 0.406 & 0.291 & 0.333 & 0.620 & 0.336 & 0.259 & 0.287 & 0.301 & 0.319 & \\
+        FEDformer &  & 0.214 & 0.327 & \underline{0.440} & 0.460 & 0.437 & 0.449 & 0.448 & 0.452 & 0.305 & 0.349 & 0.610 & 0.376 & 0.309 & 0.360 & 0.291 & 0.381 & \\
+        Autoformer &  & 0.227 & 0.338 & 0.496 & 0.487 & 0.450 & 0.459 & 0.588 & 0.517 & 0.327 & 0.371 & 0.628 & 0.379 & 0.338 & 0.382 & 0.885 & 0.711 & \\
+        \textbf{Ours} &  & 0.183 & 0.277 & 0.456 & 0.442 & \underline{0.369} & \underline{0.397} & \underline{0.385} & \underline{0.398} & \underline{0.278} & \underline{0.323} & 0.432 & 0.289 & \underline{0.256} & \underline{0.280} & \textbf{0.232} & 0.268 & \\
+        \textbf{Ours} + FreDF loss &  & \textbf{0.173} & \underline{0.266} & \textbf{0.434} & \textbf{0.429} & \textbf{0.356} & \textbf{0.386} & \textbf{0.382} & \textbf{0.393} & \textbf{0.276} & \textbf{0.320} & -- & -- & \underline{0.256} & \textbf{0.279} & 0.235 & \underline{0.259} & \\
+        FAN (iTrans.) &  & 0.182 & 0.279 & 0.485 & 0.473 & 0.489 & 0.476 & 0.409 & 0.417 & 0.324 & 0.372 & 0.465 & 0.317 & \textbf{0.251} & 0.296 & 0.247 & 0.298 & \\
+        FreDF (iTrans.) &  & \underline{0.174} & \textbf{0.262} & 0.494 & 0.471 & 0.381 & 0.404 & 0.412 & 0.409 & 0.286 & 0.327 & \textbf{0.423} & \textbf{0.277} & 0.259 & \textbf{0.279} & 0.236 & \textbf{0.258} & \\
+        \cmidrule(r){1-18}
+        RLinear & \multirow{3}*{\makecell{Linear\\-based}} & 0.219 & 0.298 & 0.446 & \underline{0.434} & 0.374 & 0.398 & 0.414 & 0.407 & 0.286 & 0.327 & 0.626 & 0.378 & 0.272 & 0.291 & 0.369 & 0.356 & \\
+        TiDE &  & 0.251 & 0.344 & 0.541 & 0.507 & 0.611 & 0.550 & 0.419 & 0.419 & 0.358 & 0.404 & 0.760 & 0.473 & 0.271 & 0.320 & 0.347 & 0.417 & \\
+        DLinear &  & 0.212 & 0.300 & 0.456 & 0.452 & 0.559 & 0.515 & 0.403 & 0.407 & 0.350 & 0.401 & 0.625 & 0.383 & 0.265 & 0.317 & 0.330 & 0.401 & \\
+        \cmidrule(r){1-18}
+        SCINet & \multirow{2}*{\makecell{Others}} & 0.268 & 0.365 & 0.747 & 0.647 & 0.954 & 0.723 & 0.485 & 0.481 & 0.571 & 0.537 & 0.804 & 0.509 & 0.292 & 0.363 & 0.282 & 0.375 & \\
+        Stationary &  & 0.193 & 0.296 & 0.570 & 0.537 & 0.526 & 0.516 & 0.481 & 0.456 & 0.306 & 0.347 & 0.624 & 0.340 & 0.288 & 0.314 & 0.261 & 0.381 & \\
+
+    \bottomrule
+  \end{tabular}
+  }
+\end{table*}

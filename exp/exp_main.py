@@ -315,6 +315,10 @@ class Exp_Main(Exp_Basic):
                     outputs = outputs[:, -self.args.pred_len:, f_dim:]
                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
                     loss = criterion(outputs, batch_y)
+                    alpha = getattr(self.args, 'fredf_alpha', 0.0)
+                    if alpha > 0:  # FreDF loss (same form as in our Time-Series-Library runs)
+                        freq_loss = (torch.fft.rfft(outputs, dim=1) - torch.fft.rfft(batch_y, dim=1)).abs().mean()
+                        loss = (1 - alpha) * loss + alpha * freq_loss
                     if getattr(self.model, 'norm_plugin', None) is not None:
                         loss = loss + self.model.norm_plugin.loss(batch_y)
                     
@@ -370,6 +374,41 @@ class Exp_Main(Exp_Basic):
             print('loading model')
             self.model.load_state_dict(torch.load(os.path.join('./checkpoints/' + setting, 'checkpoint.pth')))
 
+        # R2: FredNormer score for eval-only runs ('direct' mode: S is the raw CV vector).
+        reest = getattr(self.args, 'cv_reestimate_test', 'none')
+        if reest is True:
+            reest = 'pooled'
+        causal_stats = None
+        if not getattr(self.args, 'disable_cv_weighting', False):
+            if reest == 'pooled':
+                print("Re-estimating CV statistics from all test look-back windows (inputs only)...")
+                self.model.cv_statistics = self.model.compute_cv_statistics(test_loader, self.device)
+            elif reest == 'causal':
+                print("Causal online CV statistics: running mean/std over test look-back windows seen so far.")
+                causal_stats = dict(n=0, s1=None, s2=None)
+                n0 = int(getattr(self.args, 'cv_prior_windows', 0) or 0)
+                if n0 > 0:  # warm start: training-split amplitude moments count as n0 windows
+                    _, train_loader = self._get_data(flag='train')
+                    bb = self.model.model
+                    s1 = s2 = None
+                    nt = 0
+                    with torch.no_grad():
+                        for bi, (bx, *_r) in enumerate(train_loader):
+                            if bi >= 100:
+                                break
+                            xin = bx.float().to(self.device).permute(0, 2, 1)
+                            if bb.revin:
+                                xin = bb.revin_layer(xin, 'norm')
+                            amp = torch.fft.fft(xin).abs().reshape(-1, xin.shape[-1])
+                            nt += amp.shape[0]
+                            s1 = amp.sum(0) if s1 is None else s1 + amp.sum(0)
+                            s2 = (amp ** 2).sum(0) if s2 is None else s2 + (amp ** 2).sum(0)
+                    causal_stats = dict(n=n0, s1=s1 * (n0 / nt), s2=s2 * (n0 / nt))
+                    print(f"Warm start from training statistics with prior weight {n0} windows (from {nt}).")
+            elif getattr(self.model, 'cv_statistics', None) is None:
+                _, train_loader = self._get_data(flag='train')
+                self.model.cv_statistics = self.model.compute_cv_statistics(train_loader, self.device)
+
         preds = []
         
         trues = []
@@ -389,6 +428,23 @@ class Exp_Main(Exp_Basic):
             for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(test_loader):
                 batch_x = batch_x.float().to(self.device)
                 batch_y = batch_y.float().to(self.device)
+                if causal_stats is not None:
+                    # update the running amplitude statistics with the look-back windows of this batch
+                    # (observed inputs only), then weight this batch with the current estimate
+                    bb = self.model.model
+                    xin = batch_x.permute(0, 2, 1)
+                    if bb.revin:
+                        xin = bb.revin_layer(xin, 'norm')
+                    amp = torch.fft.fft(xin).abs().reshape(-1, xin.shape[-1])
+                    s1, s2 = amp.sum(0), (amp ** 2).sum(0)
+                    causal_stats['n'] += amp.shape[0]
+                    causal_stats['s1'] = s1 if causal_stats['s1'] is None else causal_stats['s1'] + s1
+                    causal_stats['s2'] = s2 if causal_stats['s2'] is None else causal_stats['s2'] + s2
+                    n = causal_stats['n']
+                    mean = causal_stats['s1'] / n
+                    var = (causal_stats['s2'] - n * mean ** 2) / max(n - 1, 1)
+                    std = var.clamp(min=0).sqrt()
+                    self.model.cv_statistics = torch.where(mean > 1e-8, std / mean, torch.zeros_like(mean))
 
                 batch_x_mark = batch_x_mark.float().to(self.device)
                 batch_y_mark = batch_y_mark.float().to(self.device)

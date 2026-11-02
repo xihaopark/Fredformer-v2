@@ -118,6 +118,16 @@ def table2(ours: pd.DataFrame) -> None:
         else:
             ov += [None, None]
     extra = []
+    ff = R2 / "fredfloss_results.csv"  # Fredformer-v2 trained with the FreDF loss (reference configuration, 3 seeds)
+    if ff.exists():
+        f = pd.read_csv(ff).dropna(subset=["mse"])
+        f = f[f.tag == "fredfloss"].assign(dataset=lambda x: x.data_path.str[:-4])
+        a = f.groupby(["dataset", "horizon"])[["mse", "mae"]].mean()
+        v = []
+        for ds in T2_COLS:
+            sub = a.loc[ds] if ds in a.index.get_level_values(0) else None
+            v += [sub.mse.mean(), sub.mae.mean()] if sub is not None and len(sub) == 4 else [None, None]
+        extra.append(dict(name=r"\textbf{Ours} + FreDF loss", type="", vals=v, raw=None))
     for tag, label in (("fank2", "FAN (iTrans.)"), ("fredf", "FreDF (iTrans.)")):
         b = base_runs(tag)
         a = b.groupby(["dataset", "horizon"])[["mse", "mae"]].mean()
@@ -149,16 +159,17 @@ def table2(ours: pd.DataFrame) -> None:
     text = []
     for r in out_rows:
         if r.get("raw") is not None:
-            text.append(r["raw"].replace("\\multirow{7}", "\\multirow{9}"))
+            text.append(r["raw"].replace("\\multirow{7}", "\\multirow{10}"))
         else:
-            name = r"\textbf{Ours}" if "Ours" in r["name"] else r["name"]
-            typ = r["type"].replace("\\multirow{7}", "\\multirow{9}")
+            name = r["name"] if "FreDF loss" in r["name"] else (r"\textbf{Ours}" if "Ours" in r["name"] else r["name"])
+            typ = r["type"].replace("\\multirow{7}", "\\multirow{10}")
             text.append(f"        {name} & {typ} & " + " & ".join(r["cells"]) + r" & \\")
     new = src[:body_start] + "\n".join(text) + src[body_end:]
     new = new.replace(
         "Results are averaged from all prediction lengths.}",
         "Results are averaged over all prediction lengths. \\method (Ours) is the mean over five seeds "
-        "(three for Solar and Traffic), using validation-selected configurations for ETT and Weather and the reference configurations otherwise; FAN and FreDF are applied to iTransformer and averaged over three seeds; "
+        "(three for Solar and Traffic), using validation-selected configurations for ETT and Weather and the reference configurations otherwise; "
+        "``Ours + FreDF loss'': \\method trained with the FreDF loss (reference configurations, three seeds, Traffic not run); FAN and FreDF are applied to iTransformer and averaged over three seeds; "
         "other baselines are the published results under the same protocol~\\cite{liu2023itransformer}. "
         "Best results are in \\textbf{bold} and second-best are \\underline{underlined}.}")
     new = new.replace("prediction lengths $S\\in", "prediction lengths $H\\in").replace("look-back length $T=96$", "look-back length $L=96$")

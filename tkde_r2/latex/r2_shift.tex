@@ -1,0 +1,11 @@
+\begin{tabular}{lcccccccc}
+\toprule
+Test-time shift & Fredformer-v2 & Fredformer-v2, online $S$ & w/o FredNormer & Const. & Inv. CV & Learned mask & w/o FN + FAN & w/o FN + SAN \\
+\midrule
+None (clean) & \textbf{0.3085} & 0.3178 & 0.3099 & 0.3089 & 0.3087 & 0.3092 & 0.3356 & 0.3156 \\
+Time warp $\times$1.10 & 0.4311 & \textbf{0.3946} & 0.4275 & 0.4293 & 0.4260 & 0.4242 & 0.4545 & 0.4198 \\
+Time warp $\times$1.25 & 0.3891 & \textbf{0.3752} & 0.3830 & 0.3886 & 0.3859 & 0.3837 & 0.4028 & 0.3867 \\
+Unseen period (17) & 0.3705 & 0.3780 & 0.3718 & 0.3698 & \textbf{0.3683} & 0.3703 & 0.3951 & 0.3811 \\
+Noise 10\% & \textbf{0.3243} & 0.3309 & 0.3280 & 0.3273 & 0.3250 & 0.3266 & 0.3493 & 0.3323 \\
+\bottomrule
+\end{tabular}

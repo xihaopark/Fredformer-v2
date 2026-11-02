@@ -1,0 +1,251 @@
+
+% \begin{table*}[htpb]
+% \renewcommand\arraystretch{1}
+%     \centering
+%     \setlength{\abovecaptionskip}{0.cm}
+%     \caption{Full results of four selected datasets. Long-term time series forecasting on ETTh2, ETTm1, Weather, and Solar-Energy datasets.}
+%     \label{tab:selected_results}
+%     \scalebox{0.81}{
+%     \begin{tabular}{cc|cc|cc|cc|cc|cc|c}
+%       \toprule
+%       \midrule
+%       \multirow{2}*{\textbf{Data}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Methods}}} & \multicolumn{2}{c}{\textbf{@Horizon 96}} & \multicolumn{2}{c}{\textbf{@Horizon 192}}& \multicolumn{2}{c}{\textbf{@Horizon 336}}& \multicolumn{2}{c}{\textbf{@Horizon 720}}& \multicolumn{2}{c}{\textbf{Average}} & \multirow{2}*{\textbf{Note}}\\ 
+%       \cmidrule(r){3-4} \cmidrule(r){5-6} \cmidrule(r){7-8} \cmidrule(r){9-10}\cmidrule(r){11-12}
+%       &  & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & \\
+      
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{ETTh2}}}
+%         &iTransformer  & 0.297  & 0.349  & 0.380  & 0.400  & 0.428  & 0.432  & 0.427  & 0.445  & 0.383  & 0.407  & \multirow{6}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & 0.302  & 0.348  & 0.388  & 0.400  & 0.426  & 0.433  & 0.431  & 0.446  & 0.387  & 0.407  & \\
+%         &Crossformer  & 0.745  & 0.584  & 0.877  & 0.656  & 1.043  & 0.731  & 1.104  & 0.763  & 0.942  & 0.684  & \\
+%         &TimesNet   & 0.340  & 0.374  & 0.402  & 0.414  & 0.452  & 0.452  & 0.462  & 0.468  & 0.414  & 0.427  & \\
+%         &FEDformer  & 0.358  & 0.397  & 0.429  & 0.439  & 0.496  & 0.487  & 0.463  & 0.474  & 0.437  & 0.449  & \\
+%         &Autoformer & 0.346  & 0.388  & 0.456  & 0.452  & 0.482  & 0.486  & 0.515  & 0.511  & 0.450  & 0.459  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & \cellcolor{myBG}\textbf{0.288}  & \cellcolor{myBG}\textbf{0.338}  & \cellcolor{myBG}\textbf{0.374}  & \cellcolor{myBG}\textbf{0.390}  & \cellcolor{myBG}\textbf{0.415}  & \cellcolor{myBG}\textbf{0.426}  & \cellcolor{myBG}\textbf{0.420}  & \cellcolor{myBG}\textbf{0.440}  & \cellcolor{myBG}\textbf{0.374}  & \cellcolor{myBG}\textbf{0.398}  & \multirow{4}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.333  & 0.387  & 0.477  & 0.476  & 0.594  & 0.541  & 0.831  & 0.657  & 0.559  & 0.515  & \\
+%         &TiDE  & 0.400  & 0.440  & 0.528  & 0.509  & 0.643  & 0.571  & 0.874  & 0.679  & 0.611  & 0.550  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.293}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.342}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.371}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.389}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.382}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.409}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.415}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.434}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.365}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.393}}  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.707  & 0.621  & 0.860  & 0.689  & 1.000  & 0.744  & 1.249  & 0.838  & 0.954  & 0.723  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.476  & 0.458  & 0.512  & 0.493  & 0.552  & 0.551  & 0.562  & 0.560  & 0.526  & 0.516  & \\
+
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{ETTm1}}}
+%         &iTransformer  & 0.334  & 0.368  & 0.377  & 0.391  & 0.426  & 0.420  & 0.491  & 0.459  & 0.407  & 0.410  & \multirow{6}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & \cellcolor{myBG}\textbf{0.329}  & \cellcolor{myBG}\textbf{0.367}  & \cellcolor{myBG}\textbf{0.367}  & \cellcolor{myBG}\textbf{0.385}  & \cellcolor{myBG}\textbf{0.399}  & \cellcolor{myBG}\textbf{0.410}  & \cellcolor{myBG}\textbf{0.454}  & \cellcolor{myBG}\textbf{0.439}  & \cellcolor{myBG}\textbf{0.387}  & \cellcolor{myBG}\textbf{0.400}  & \\
+%         &Crossformer  & 0.404  & 0.426  & 0.450  & 0.451  & 0.532  & 0.515  & 0.666  & 0.589  & 0.513  & 0.496  & \\
+%         &TimesNet   & 0.338  & 0.375  & 0.374  & 0.387  & 0.410  & 0.411  & 0.478  & 0.450  & 0.400  & 0.406  & \\
+%         &FEDformer  & 0.379  & 0.419  & 0.426  & 0.441  & 0.445  & 0.459  & 0.543  & 0.490  & 0.448  & 0.452  & \\
+%         &Autoformer & 0.505  & 0.475  & 0.553  & 0.496  & 0.621  & 0.537  & 0.671  & 0.561  & 0.588  & 0.517  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & 0.355  & 0.376  & 0.391  & 0.392  & 0.424  & 0.415  & 0.487  & 0.450  & 0.414  & 0.407  & \multirow{4}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.345  & 0.372  & 0.380  & 0.389  & 0.413  & 0.413  & 0.474  & 0.453  & 0.403  & 0.407  & \\
+%         &TiDE  & 0.364  & 0.387  & 0.398  & 0.404  & 0.428  & 0.425  & 0.487  & 0.461  & 0.419  & 0.419  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.326}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.361}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.363}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.380}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.395}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.403}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.453}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.438}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.384}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.395}}  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.418  & 0.438  & 0.439  & 0.450  & 0.490  & 0.485  & 0.595  & 0.550  & 0.485  & 0.481  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.386  & 0.398  & 0.459  & 0.444  & 0.495  & 0.464  & 0.585  & 0.516  & 0.481  & 0.456  & \\
+
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{Weather}}}
+%         &iTransformer  & 0.174  & 0.214  & 0.221  & 0.254  & 0.278  & 0.296  & 0.358  & 0.349  & 0.258  & 0.279  & \multirow{6}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & 0.177  & 0.218  & 0.225  & 0.259  & 0.278  & 0.297  & 0.354  & 0.348  & 0.259  & 0.281  & \\
+%         &Crossformer  & \cellcolor{myBG}\textbf{0.158}  & 0.230  & \cellcolor{myBG}\textbf{0.206}  & 0.277  & 0.272  & 0.335  & 0.398  & 0.418  & 0.259  & 0.315  & \\
+%         &TimesNet   & 0.172  & 0.220  & 0.219  & 0.261  & 0.280  & 0.306  & 0.365  & 0.359  & 0.259  & 0.287  & \\
+%         &FEDformer  & 0.217  & 0.296  & 0.276  & 0.336  & 0.339  & 0.380  & 0.403  & 0.428  & 0.309  & 0.360  & \\
+%         &Autoformer & 0.266  & 0.336  & 0.307  & 0.367  & 0.359  & 0.395  & 0.419  & 0.428  & 0.338  & 0.382  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & 0.192  & 0.232  & 0.240  & 0.271  & 0.292  & 0.307  & 0.364  & 0.353  & 0.272  & 0.291  & \multirow{4}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.196  & 0.255  & 0.237  & 0.296  & 0.283  & 0.335  & 0.345  & 0.381  & 0.265  & 0.317  & \\
+%         &TiDE  & 0.202  & 0.261  & 0.242  & 0.298  & 0.287  & 0.335  & \cellcolor{myBG}\textbf{0.351}  & 0.386  & 0.271  & 0.320  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.163}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.207}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.211}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.251}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.267}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.292}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.343}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.341}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.246}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.272}}  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.221  & 0.306  & 0.261  & 0.340  & 0.309  & 0.378  & 0.377  & 0.427  & 0.292  & 0.363  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.173  & 0.223  & 0.245  & 0.285  & 0.321  & 0.338  & 0.414  & 0.410  & 0.288  & 0.314  & \\
+
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{Solar-Energy}}}
+%         &iTransformer  & 0.203  & 0.237  & 0.233  & 0.261  & 0.248  & 0.273  & 0.249  & 0.275  & 0.233  & 0.262  & \multirow{6}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & 0.234  & 0.286  & 0.267  & 0.310  & 0.290  & 0.315  & 0.289  & 0.317  & 0.270  & 0.307  & \\
+%         &Crossformer  & 0.310  & 0.331  & 0.734  & 0.725  & 0.750  & 0.735  & 0.769  & 0.765  & 0.641  & 0.639  & \\
+%         &TimesNet   & 0.250  & 0.292  & 0.296  & 0.318  & 0.319  & 0.330  & 0.338  & 0.337  & 0.301  & 0.319  & \\
+%         &FEDformer  & 0.242  & 0.342  & 0.285  & 0.380  & 0.282  & 0.376  & 0.357  & 0.427  & 0.291  & 0.381  & \\
+%         &Autoformer & 0.884  & 0.711  & 0.834  & 0.692  & 0.941  & 0.723  & 0.882  & 0.717  & 0.885  & 0.711  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & 0.322  & 0.339  & 0.359  & 0.356  & 0.397  & 0.369  & 0.397  & 0.356  & 0.369  & 0.356  & \multirow{4}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.290  & 0.378  & 0.320  & 0.398  & 0.353  & 0.415  & 0.356  & 0.413  & 0.330  & 0.401  & \\
+%         &TiDE  & 0.312  & 0.399  & 0.339  & 0.416  & 0.368  & 0.430  & 0.370  & 0.425  & 0.347  & 0.417  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.185}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.233}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.227}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.253}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.246}}  & \cellcolor{myBG}\textbf{0.284}  & {\color{myHL}\cellcolor{myBG}\textbf{0.247}}  & \cellcolor{myBG}\textbf{0.276}  & {\color{myHL}\cellcolor{myBG}\textbf{0.226}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.261}}  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.237  & 0.344  & 0.280  & 0.380  & 0.304  & 0.389  & 0.308  & 0.388  & 0.282  & 0.375  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.215  & 0.249  & 0.254  & 0.272  & 0.290  & 0.296  & 0.285  & 0.295  & 0.261  & 0.381  & \\
+%     \bottomrule
+%   \end{tabular}
+%   }
+% \end{table*}
+
+
+
+% \begin{table*}[htpb]
+% \renewcommand\arraystretch{1}
+%     \centering
+%     \setlength{\abovecaptionskip}{0.cm}
+%     \caption{Full results of four selected datasets. Long-term time series forecasting on ETTh2, ETTm1, Weather, and Solar-Energy datasets.}
+%     \label{tab:selected_results}
+%     \scalebox{0.81}{
+%     \begin{tabular}{cc|cc|cc|cc|cc|cc|c}
+%       \toprule
+%       \midrule
+%       \multirow{2}*{\textbf{Data}} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Methods}}} & \multicolumn{2}{c}{\textbf{@Horizon 96}} & \multicolumn{2}{c}{\textbf{@Horizon 192}}& \multicolumn{2}{c}{\textbf{@Horizon 336}}& \multicolumn{2}{c}{\textbf{@Horizon 720}}& \multicolumn{2}{c}{\textbf{Average}} & \multirow{2}*{\textbf{Note}}\\ 
+%       \cmidrule(r){3-4} \cmidrule(r){5-6} \cmidrule(r){7-8} \cmidrule(r){9-10}\cmidrule(r){11-12}
+%       &  & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & \\
+      
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{ETTh2}}}
+%         &iTransformer  & 0.297  & 0.349  & 0.380  & 0.400  & 0.428  & 0.432  & 0.427  & 0.445  & 0.383  & 0.407  & \multirow{7}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & 0.302  & 0.348  & 0.388  & 0.400  & 0.426  & 0.433  & 0.431  & 0.446  & 0.387  & 0.407  & \\
+%         &Crossformer  & 0.745  & 0.584  & 0.877  & 0.656  & 1.043  & 0.731  & 1.104  & 0.763  & 0.942  & 0.684  & \\
+%         &TimesNet   & 0.340  & 0.374  & 0.402  & 0.414  & 0.452  & 0.452  & 0.462  & 0.468  & 0.414  & 0.427  & \\
+%         &FEDformer  & 0.358  & 0.397  & 0.429  & 0.439  & 0.496  & 0.487  & 0.463  & 0.474  & 0.437  & 0.449  & \\
+%         &Autoformer & 0.346  & 0.388  & 0.456  & 0.452  & 0.482  & 0.486  & 0.515  & 0.511  & 0.450  & 0.459  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.293}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.345}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.375}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.392}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.368}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.399}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.402}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.427}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.360}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.391}}  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & \cellcolor{myBG}\textbf{0.288}  & \cellcolor{myBG}\textbf{0.338}  & \cellcolor{myBG}\textbf{0.374}  & \cellcolor{myBG}\textbf{0.390}  & \cellcolor{myBG}\textbf{0.415}  & \cellcolor{myBG}\textbf{0.426}  & \cellcolor{myBG}\textbf{0.420}  & \cellcolor{myBG}\textbf{0.440}  & \cellcolor{myBG}\textbf{0.374}  & \cellcolor{myBG}\textbf{0.398}  & \multirow{3}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.333  & 0.387  & 0.477  & 0.476  & 0.594  & 0.541  & 0.831  & 0.657  & 0.559  & 0.515  & \\
+%         &TiDE  & 0.400  & 0.440  & 0.528  & 0.509  & 0.643  & 0.571  & 0.874  & 0.679  & 0.611  & 0.550  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.707  & 0.621  & 0.860  & 0.689  & 1.000  & 0.744  & 1.249  & 0.838  & 0.954  & 0.723  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.476  & 0.458  & 0.512  & 0.493  & 0.552  & 0.551  & 0.562  & 0.560  & 0.526  & 0.516  & \\
+
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{ETTm1}}}
+%         &iTransformer  & 0.334  & 0.368  & 0.377  & 0.391  & 0.426  & 0.420  & 0.491  & 0.459  & 0.407  & 0.410  & \multirow{7}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & \cellcolor{myBG}\textbf{0.329}  & \cellcolor{myBG}\textbf{0.367}  & \cellcolor{myBG}\textbf{0.367}  & \cellcolor{myBG}\textbf{0.385}  & \cellcolor{myBG}\textbf{0.399}  & \cellcolor{myBG}\textbf{0.410}  & \cellcolor{myBG}\textbf{0.454}  & \cellcolor{myBG}\textbf{0.439}  & \cellcolor{myBG}\textbf{0.387}  & \cellcolor{myBG}\textbf{0.400}  & \\
+%         &Crossformer  & 0.404  & 0.426  & 0.450  & 0.451  & 0.532  & 0.515  & 0.666  & 0.589  & 0.513  & 0.496  & \\
+%         &TimesNet   & 0.338  & 0.375  & 0.374  & 0.387  & 0.410  & 0.411  & 0.478  & 0.450  & 0.400  & 0.406  & \\
+%         &FEDformer  & 0.379  & 0.419  & 0.426  & 0.441  & 0.445  & 0.459  & 0.543  & 0.490  & 0.448  & 0.452  & \\
+%         &Autoformer & 0.505  & 0.475  & 0.553  & 0.496  & 0.621  & 0.537  & 0.671  & 0.561  & 0.588  & 0.517  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.340}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.370}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.360}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.382}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.392}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.405}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.457}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.440}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.388}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.400}}  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & 0.355  & 0.376  & 0.391  & 0.392  & 0.424  & 0.415  & 0.487  & 0.450  & 0.414  & 0.407  & \multirow{3}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.345  & 0.372  & 0.380  & 0.389  & 0.413  & 0.413  & 0.474  & 0.453  & 0.403  & 0.407  & \\
+%         &TiDE  & 0.364  & 0.387  & 0.398  & 0.404  & 0.428  & 0.425  & 0.487  & 0.461  & 0.419  & 0.419  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.418  & 0.438  & 0.439  & 0.450  & 0.490  & 0.485  & 0.595  & 0.550  & 0.485  & 0.481  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.386  & 0.398  & 0.459  & 0.444  & 0.495  & 0.464  & 0.585  & 0.516  & 0.481  & 0.456  & \\
+
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{Weather}}}
+%         &iTransformer  & 0.174  & 0.214  & 0.221  & 0.254  & 0.278  & 0.296  & 0.358  & 0.349  & 0.258  & 0.279  & \multirow{7}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & 0.177  & 0.218  & 0.225  & 0.259  & 0.278  & 0.297  & 0.354  & 0.348  & 0.259  & 0.281  & \\
+%         &Crossformer  & \cellcolor{myBG}\textbf{0.158}  & 0.230  & \cellcolor{myBG}\textbf{0.206}  & 0.277  & 0.272  & 0.335  & 0.398  & 0.418  & 0.259  & 0.315  & \\
+%         &TimesNet   & 0.172  & 0.220  & 0.219  & 0.261  & 0.280  & 0.306  & 0.365  & 0.359  & 0.259  & 0.287  & \\
+%         &FEDformer  & 0.217  & 0.296  & 0.276  & 0.336  & 0.339  & 0.380  & 0.403  & 0.428  & 0.309  & 0.360  & \\
+%         &Autoformer & 0.266  & 0.336  & 0.307  & 0.367  & 0.359  & 0.395  & 0.419  & 0.428  & 0.338  & 0.382  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.178}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.217}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.227}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.261}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.278}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.298}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.352}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.348}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.259}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.281}}  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & 0.192  & 0.232  & 0.240  & 0.271  & 0.292  & 0.307  & 0.364  & 0.353  & 0.272  & 0.291  & \multirow{3}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.196  & 0.255  & 0.237  & 0.296  & 0.283  & 0.335  & 0.345  & 0.381  & 0.265  & 0.317  & \\
+%         &TiDE  & 0.202  & 0.261  & 0.242  & 0.298  & 0.287  & 0.335  & \cellcolor{myBG}\textbf{0.351}  & 0.386  & 0.271  & 0.320  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.221  & 0.306  & 0.261  & 0.340  & 0.309  & 0.378  & 0.377  & 0.427  & 0.292  & 0.363  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.173  & 0.223  & 0.245  & 0.285  & 0.321  & 0.338  & 0.414  & 0.410  & 0.288  & 0.314  & \\
+
+%        \hline
+%     \midrule
+%         \multirow{12}*{\rotatebox{90}{\textbf{Solar-Energy}}}
+%         &iTransformer  & 0.203  & 0.237  & 0.233  & 0.261  & 0.248  & 0.273  & 0.249  & 0.275  & 0.233  & 0.262  & \multirow{7}*{\makecell{Trans\\-former\\-based}}\\
+%         &PatchTST & 0.234  & 0.286  & 0.267  & 0.310  & 0.290  & 0.315  & 0.289  & 0.317  & 0.270  & 0.307  & \\
+%         &Crossformer  & 0.310  & 0.331  & 0.734  & 0.725  & 0.750  & 0.735  & 0.769  & 0.765  & 0.641  & 0.639  & \\
+%         &TimesNet   & 0.250  & 0.292  & 0.296  & 0.318  & 0.319  & 0.330  & 0.338  & 0.337  & 0.301  & 0.319  & \\
+%         &FEDformer  & 0.242  & 0.342  & 0.285  & 0.380  & 0.282  & 0.376  & 0.357  & 0.427  & 0.291  & 0.381  & \\
+%         &Autoformer & 0.884  & 0.711  & 0.834  & 0.692  & 0.941  & 0.723  & 0.882  & 0.717  & 0.885  & 0.711  & \\
+%         &\textbf{Ours} & {\color{myHL}\cellcolor{myBG}\textbf{0.188}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.229}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.229}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.264}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.259}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.288}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.257}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.286}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.234}}  & {\color{myHL}\cellcolor{myBG}\textbf{0.267}}  & \\
+%         \cmidrule(r){2-13}
+%         &RLinear & 0.322  & 0.339  & 0.359  & 0.356  & 0.397  & 0.369  & 0.397  & 0.356  & 0.369  & 0.356  & \multirow{3}*{\makecell{Linear\\-based}}\\
+%         &DLinear  & 0.290  & 0.378  & 0.320  & 0.398  & 0.353  & 0.415  & 0.356  & 0.413  & 0.330  & 0.401  & \\
+%         &TiDE  & 0.312  & 0.399  & 0.339  & 0.416  & 0.368  & 0.430  & 0.370  & 0.425  & 0.347  & 0.417  & \\
+%         \cmidrule(r){2-13}
+%         &SCINet  & 0.237  & 0.344  & 0.280  & 0.380  & 0.304  & 0.389  & 0.308  & 0.388  & 0.282  & 0.375  & \multirow{2}*{\makecell{Others}}\\
+%         &Stationary  & 0.215  & 0.249  & 0.254  & 0.272  & 0.290  & 0.296  & 0.285  & 0.295  & 0.261  & 0.381  & \\
+%     \bottomrule
+%   \end{tabular}
+%   }
+% \end{table*}
+
+
+\begin{table*}[htpb]
+\renewcommand\arraystretch{1.1}
+\centering
+\setlength{\abovecaptionskip}{0.cm}
+\caption{The best results are highlighted in \boldres{bold}, and the second-best results are \secondres{underlined}. 
+The look-back window length is $L = 96$. 
+Full results of four selected datasets (transposed layout). Long-term time series forecasting on ETTh2, ETTm1, Weather, and Solar-Energy datasets.}
+\label{tab:selected_results_transposed}
+
+
+%\newcommand{\hlcell}[1]{{\color{myHL}\cellcolor{myBG}\textbf{#1}}}
+%\newcommand{\bestcell}[1]{\cellcolor{myBG}\textbf{#1}}
+
+\scalebox{0.55}{
+\begin{tabular}{lc|cc cc cc cc cc cc cc|cc cc cc|cc cc}
+\toprule
+
+\multirow{3}{*}{\textbf{Data}} & \multirow{3}{*}{\textbf{\makecell{Horizon}}} & \multicolumn{14}{c|}{\textbf{Transformer-based}} & \multicolumn{6}{c|}{\textbf{Linear-based}} & \multicolumn{4}{c}{\textbf{Others}} \\
+\cmidrule(lr){3-16} \cmidrule(lr){17-22} \cmidrule(lr){23-26}
+
+& & \multicolumn{2}{c}{iTransformer} & \multicolumn{2}{c}{PatchTST} & \multicolumn{2}{c}{Crossformer} & \multicolumn{2}{c}{TimesNet} & \multicolumn{2}{c}{FEDformer} & \multicolumn{2}{c}{Autoformer} & \multicolumn{2}{c|}{\textbf{Ours}} & \multicolumn{2}{c}{RLinear} & \multicolumn{2}{c}{DLinear} & \multicolumn{2}{c|}{TiDE} & \multicolumn{2}{c}{SCINet} & \multicolumn{2}{c}{Stationary} \\
+
+& & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE & MSE & MAE \\
+\midrule
+\midrule
+
+\multirow{5}{*}{\rotatebox{90}{\textbf{ETTh2}}}
+& 96 & 0.297 & 0.349 & 0.302 & 0.348 & 0.745 & 0.584 & 0.340 & 0.374 & 0.358 & 0.397 & 0.346 & 0.388 & \secondres{0.293} & \secondres{0.345} & \boldres{0.288} & \boldres{0.338} & 0.333 & 0.387 & 0.400 & 0.440 & 0.707 & 0.621 & 0.476 & 0.458 \\
+& 192 & 0.380 & 0.400 & 0.388 & 0.400 & 0.877 & 0.656 & 0.402 & 0.414 & 0.429 & 0.439 & 0.456 & 0.452 & \secondres{0.375} & \secondres{0.392} & \boldres{0.374} & \boldres{0.390} & 0.477 & 0.476 & 0.528 & 0.509 & 0.860 & 0.689 & 0.512 & 0.493 \\
+& 336 & 0.428 & 0.432 & 0.426 & 0.433 & 1.043 & 0.731 & 0.452 & 0.452 & 0.496 & 0.487 & 0.482 & 0.486 & \boldres{0.368} & \boldres{0.399} & \secondres{0.415} & \secondres{0.426} & 0.594 & 0.541 & 0.643 & 0.571 & 1.000 & 0.744 & 0.552 & 0.551 \\
+& 720 & 0.427 & 0.445 & 0.431 & 0.446 & 1.104 & 0.763 & 0.462 & 0.468 & 0.463 & 0.474 & 0.515 & 0.511 & \boldres{0.402} & \boldres{0.427} & \secondres{0.420} & \secondres{0.440} & 0.831 & 0.657 & 0.874 & 0.679 & 1.249 & 0.838 & 0.562 & 0.560 \\
+\cmidrule(lr){2-26}
+& Avg. & 0.383 & 0.407 & 0.387 & 0.407 & 0.942 & 0.684 & 0.414 & 0.427 & 0.437 & 0.449 & 0.450 & 0.459 & \boldres{0.360} & \boldres{0.391} & \secondres{0.374} & \secondres{0.398} & 0.559 & 0.515 & 0.611 & 0.550 & 0.954 & 0.723 & 0.526 & 0.516 \\
+\midrule
+
+% --- ETTm1 数据集 ---
+\multirow{5}{*}{\rotatebox{90}{\textbf{ETTm1}}}
+& 96 & 0.334 & 0.368 & \secondres{0.329} & \secondres{0.367} & 0.404 & 0.426 & 0.338 & 0.375 & 0.379 & 0.419 & 0.505 & 0.475 & \boldres{0.325} & \boldres{0.366} & 0.355 & 0.376 & 0.345 & 0.372 & 0.364 & 0.387 & 0.418 & 0.438 & 0.386 & 0.398 \\
+& 192 & 0.377 & 0.391 & \secondres{0.367} & \secondres{0.385} & 0.450 & 0.451 & 0.374 & 0.387 & 0.426 & 0.441 & 0.553 & 0.496 & \boldres{0.360} & \boldres{0.382} & 0.391 & 0.392 & 0.380 & 0.389 & 0.398 & 0.404 & 0.439 & 0.450 & 0.459 & 0.444 \\
+& 336 & 0.426 & 0.420 & \secondres{0.399} & \secondres{0.410} & 0.532 & 0.515 & 0.410 & 0.411 & 0.445 & 0.459 & 0.621 & 0.537 & \boldres{0.392} & \boldres{0.405} & 0.424 & 0.415 & 0.413 & 0.413 & 0.428 & 0.425 & 0.490 & 0.485 & 0.495 & 0.464 \\
+& 720 & 0.491 & 0.459 & \secondres{0.454} & \secondres{0.439} & 0.666 & 0.589 & 0.478 & 0.450 & 0.543 & 0.490 & 0.671 & 0.561 & \boldres{0.449} & \boldres{0.435} & 0.487 & 0.450 & 0.474 & 0.453 & 0.487 & 0.461 & 0.595 & 0.550 & 0.585 & 0.516 \\
+\cmidrule(lr){2-26}
+& Avg. & 0.407 & 0.410 & \secondres{0.387} & \secondres{0.400} & 0.513 & 0.496 & 0.400 & 0.406 & 0.448 & 0.452 & 0.588 & 0.517 & \boldres{0.380} & \boldres{0.393} & 0.414 & 0.407 & 0.403 & 0.407 & 0.419 & 0.419 & 0.485 & 0.481 & 0.481 & 0.456 \\
+\midrule
+
+% --- Weather 数据集 ---
+\multirow{5}{*}{\rotatebox{90}{\textbf{Weather}}}
+& 96 & 0.174 & \boldres{0.214} & 0.177 & 0.218 & \secondres{0.158} & 0.230 & 0.172 & 0.220 & 0.217 & 0.296 & 0.266 & 0.336 & \boldres{0.149} & \secondres{0.217} & 0.192 & 0.232 & 0.196 & 0.255 & 0.202 & 0.261 & 0.221 & 0.306 & 0.173 & 0.223 \\
+& 192 & 0.221 & \boldres{0.254} & 0.225 & \secondres{0.259} & \secondres{0.206} & 0.277 & 0.219 & 0.261 & 0.276 & 0.336 & 0.307 & 0.367 & \boldres{0.197} & 0.261 & 0.240 & 0.271 & 0.237 & 0.296 & 0.242 & 0.298 & 0.261 & 0.340 & 0.245 & 0.285 \\
+& 336 & 0.278 & \boldres{0.296} & 0.278 & \secondres{0.297} & \secondres{0.272} & 0.335 & 0.280 & 0.306 & 0.339 & 0.380 & 0.359 & 0.395 & \boldres{0.267} & 0.298 & 0.292 & 0.307 & 0.283 & 0.335 & 0.287 & 0.335 & 0.309 & 0.378 & 0.321 & 0.338 \\
+& 720 & 0.358 & \secondres{0.349} & 0.354 & \boldres{0.348} & 0.398 & 0.418 & 0.365 & 0.359 & 0.403 & 0.428 & 0.419 & 0.428 & 0.352 & \boldres{0.348} & 0.364 & 0.353 & \boldres{0.345} & 0.381 & \secondres{0.351} & 0.386 & 0.377 & 0.427 & 0.414 & 0.410 \\
+\cmidrule(lr){2-26}
+& Avg. & \secondres{0.258} & \secondres{0.279} & 0.259 & 0.281 & 0.259 & 0.315 & 0.259 & 0.287 & 0.309 & 0.360 & 0.338 & 0.382 & \boldres{0.240} & \boldres{0.274} & 0.272 & 0.291 & 0.265 & 0.317 & 0.271 & 0.320 & 0.292 & 0.363 & 0.288 & 0.314 \\
+\midrule
+
+\multirow{5}{*}{\rotatebox{90}{\textbf{Solar-Energy}}}
+& 96 & \secondres{0.203} & \secondres{0.237} & 0.234 & 0.286 & 0.310 & 0.331 & 0.250 & 0.292 & 0.242 & 0.342 & 0.884 & 0.711 & \boldres{0.188} & \boldres{0.229} & 0.322 & 0.339 & 0.290 & 0.378 & 0.312 & 0.399 & 0.237 & 0.344 & 0.215 & 0.249 \\
+& 192 & \secondres{0.233} & \boldres{0.261} & 0.267 & 0.310 & 0.734 & 0.725 & 0.296 & 0.318 & 0.285 & 0.380 & 0.834 & 0.692 & \boldres{0.229} & \secondres{0.264} & 0.359 & 0.356 & 0.320 & 0.398 & 0.339 & 0.416 & 0.280 & 0.380 & 0.254 & 0.272 \\
+& 336 & \secondres{0.248} & \secondres{0.273} & 0.290 & 0.315 & 0.750 & 0.735 & 0.319 & 0.330 & 0.282 & 0.376 & 0.941 & 0.723 & \boldres{0.244} & \boldres{0.270} & 0.397 & 0.369 & 0.353 & 0.415 & 0.368 & 0.430 & 0.304 & 0.389 & 0.290 & 0.296 \\
+& 720 & \secondres{0.249} & \secondres{0.275} & 0.289 & 0.317 & 0.769 & 0.765 & 0.338 & 0.337 & 0.357 & 0.427 & 0.882 & 0.717 & \boldres{0.247} & \boldres{0.272} & 0.397 & 0.356 & 0.356 & 0.413 & 0.370 & 0.425 & 0.308 & 0.388 & 0.285 & 0.295 \\
+\cmidrule(lr){2-26}
+& Avg. & \secondres{0.233} & \secondres{0.262} & 0.270 & 0.307 & 0.641 & 0.639 & 0.301 & 0.319 & 0.291 & 0.381 & 0.885 & 0.711 & \boldres{0.220} & \boldres{0.258} & 0.369 & 0.356 & 0.330 & 0.401 & 0.347 & 0.417 & 0.282 & 0.375 & 0.261 & 0.381 \\
+
+\bottomrule
+\end{tabular}
+}
+\end{table*}

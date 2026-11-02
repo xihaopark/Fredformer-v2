@@ -40,7 +40,9 @@ def load_refs() -> dict[tuple[str, str], dict[str, str]]:
 def build_command(ref: dict[str, str], job: dict[str, str], gpu: str) -> list[str]:
     stem = Path(job["data_path"]).stem
     model_id = f"r2_{job['tag']}_{stem}_96_{job['horizon']}_{job['mode']}_seed{job['seed']}"
-    if job.get("extra"):
+    if job.get("model_id"):  # evaluate an existing checkpoint of another job
+        model_id = job["model_id"]
+    elif job.get("extra"):
         model_id += "_x" + hashlib.md5(job["extra"].encode()).hexdigest()[:6]
     cmd = [
         str(PY), "-u", "run_longExp.py",
@@ -90,6 +92,9 @@ def build_command(ref: dict[str, str], job: dict[str, str], gpu: str) -> list[st
     else:
         cmd += ["--cv_weighting_mode", job["mode"]]
     extra = shlex.split(job.get("extra") or "")
+    if "--keep_arrays" in extra:  # save predictions for the spectral-error analysis
+        extra.remove("--keep_arrays")
+        cmd.remove("--skip_save_arrays")
     # later occurrences of an argument override earlier ones in argparse
     return cmd + extra
 
@@ -136,7 +141,7 @@ def main() -> int:
             if args.train_epochs:
                 ref["train_epochs"] = args.train_epochs
             cmd = build_command(ref, job, "0")
-            log_path = LOG_DIR / f"{cmd[cmd.index('--model_id') + 1]}_{time.strftime('%Y%m%d_%H%M%S')}.log"
+            log_path = LOG_DIR / f"{cmd[cmd.index('--model_id') + 1]}_{job['tag']}_{time.strftime('%Y%m%d_%H%M%S')}_{len(running)}.log"
             env = os.environ.copy()
             env["CUDA_VISIBLE_DEVICES"] = gpu
             for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):

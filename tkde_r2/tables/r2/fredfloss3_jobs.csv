@@ -1,0 +1,2 @@
+tag,data_path,horizon,seed,mode,extra,ref_data_path,model_id
+fredfloss,electricity.csv,720,2023,direct,--fredf_alpha 0.5,,

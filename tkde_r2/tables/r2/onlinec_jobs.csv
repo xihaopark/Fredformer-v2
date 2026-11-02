@@ -1,0 +1,361 @@
+tag,data_path,horizon,seed,mode,extra,ref_data_path,model_id
+onlinec,ETTh1_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2023
+onlinep,ETTh1_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2023
+evalchk,ETTh1_shift_warp10.csv,96,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2023
+onlinec,ETTh2_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2023
+onlinep,ETTh2_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2023
+evalchk,ETTh2_shift_warp25.csv,96,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2023
+onlinec,ETTh1_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2021
+onlinep,ETTh1_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2021
+evalchk,ETTh1_shift_newfreq.csv,336,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2021
+onlinec,weather_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2021
+onlinep,weather_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2021
+evalchk,weather_shift_warp25.csv,96,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2021
+onlinec,weather_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2022
+onlinep,weather_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2022
+evalchk,weather_shift_newfreq.csv,336,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2022
+onlinec,ETTm2_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2021
+onlinep,ETTm2_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2021
+evalchk,ETTm2_shift_noise10t.csv,336,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2021
+onlinec,weather_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2021
+onlinep,weather_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2021
+evalchk,weather_shift_newfreq.csv,336,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2021
+onlinec,ETTh2_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2021
+onlinep,ETTh2_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2021
+evalchk,ETTh2_shift_newfreq.csv,96,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2021
+onlinec,ETTm2_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2023
+onlinep,ETTm2_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2023
+evalchk,ETTm2_shift_warp10.csv,96,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2023
+onlinec,ETTh1_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2021
+onlinep,ETTh1_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2021
+evalchk,ETTh1_shift_noise10t.csv,336,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2021
+onlinec,ETTh2_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2021
+onlinep,ETTh2_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2021
+evalchk,ETTh2_shift_noise10t.csv,96,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2021
+onlinec,ETTm2_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2022
+onlinep,ETTm2_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2022
+evalchk,ETTm2_shift_newfreq.csv,336,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2022
+onlinec,ETTh1_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2023
+onlinep,ETTh1_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2023
+evalchk,ETTh1_shift_warp10.csv,336,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2023
+onlinec,ETTh1_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2022
+onlinep,ETTh1_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2022
+evalchk,ETTh1_shift_warp10.csv,96,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2022
+onlinec,ETTh1_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2023
+onlinep,ETTh1_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2023
+evalchk,ETTh1_shift_noise10t.csv,336,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2023
+onlinec,ETTm2_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2023
+onlinep,ETTm2_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2023
+evalchk,ETTm2_shift_noise10t.csv,96,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2023
+onlinec,ETTh1_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2023
+onlinep,ETTh1_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2023
+evalchk,ETTh1_shift_newfreq.csv,96,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2023
+onlinec,ETTh2_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2022
+onlinep,ETTh2_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2022
+evalchk,ETTh2_shift_warp10.csv,96,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2022
+onlinec,ETTm2_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2021
+onlinep,ETTm2_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2021
+evalchk,ETTm2_shift_warp25.csv,336,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2021
+onlinec,ETTh2_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2021
+onlinep,ETTh2_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2021
+evalchk,ETTh2_shift_noise10t.csv,336,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2021
+onlinec,ETTm2_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2022
+onlinep,ETTm2_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2022
+evalchk,ETTm2_shift_warp25.csv,96,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2022
+onlinec,ETTh2_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2021
+onlinep,ETTh2_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2021
+evalchk,ETTh2_shift_warp25.csv,336,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2021
+onlinec,weather_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2023
+onlinep,weather_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2023
+evalchk,weather_shift_noise10t.csv,96,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2023
+onlinec,weather_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2023
+onlinep,weather_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2023
+evalchk,weather_shift_warp25.csv,336,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2023
+onlinec,ETTh2_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2022
+onlinep,ETTh2_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2022
+evalchk,ETTh2_shift_warp25.csv,336,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2022
+onlinec,ETTm2_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2023
+onlinep,ETTm2_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2023
+evalchk,ETTm2_shift_newfreq.csv,336,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2023
+onlinec,ETTm2_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2021
+onlinep,ETTm2_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2021
+evalchk,ETTm2_shift_newfreq.csv,96,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2021
+onlinec,weather_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2022
+onlinep,weather_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2022
+evalchk,weather_shift_noise10t.csv,336,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2022
+onlinec,ETTh1_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2021
+onlinep,ETTh1_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2021
+evalchk,ETTh1_shift_newfreq.csv,96,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2021
+onlinec,weather_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2021
+onlinep,weather_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2021
+evalchk,weather_shift_warp10.csv,336,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2021
+onlinec,ETTh2_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2021
+onlinep,ETTh2_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2021
+evalchk,ETTh2_shift_newfreq.csv,336,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2021
+onlinec,ETTh2_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2022
+onlinep,ETTh2_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2022
+evalchk,ETTh2_shift_warp25.csv,96,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2022
+onlinec,weather_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2023
+onlinep,weather_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2023
+evalchk,weather_shift_newfreq.csv,96,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2023
+onlinec,ETTm2_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2022
+onlinep,ETTm2_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2022
+evalchk,ETTm2_shift_warp25.csv,336,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2022
+onlinec,ETTh2_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2022
+onlinep,ETTh2_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2022
+evalchk,ETTh2_shift_noise10t.csv,336,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2022
+onlinec,ETTm2_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2023
+onlinep,ETTm2_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2023
+evalchk,ETTm2_shift_warp10.csv,336,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2023
+onlinec,ETTm2_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2022
+onlinep,ETTm2_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2022
+evalchk,ETTm2_shift_newfreq.csv,96,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2022
+onlinec,weather_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2022
+onlinep,weather_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2022
+evalchk,weather_shift_warp10.csv,96,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2022
+onlinec,ETTh2_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2023
+onlinep,ETTh2_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2023
+evalchk,ETTh2_shift_newfreq.csv,336,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2023
+onlinec,ETTh2_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2023
+onlinep,ETTh2_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2023
+evalchk,ETTh2_shift_warp25.csv,336,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_336_direct_seed2023
+onlinec,ETTm2_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2022
+onlinep,ETTm2_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2022
+evalchk,ETTm2_shift_warp10.csv,336,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2022
+onlinec,weather_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2021
+onlinep,weather_shift_newfreq.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2021
+evalchk,weather_shift_newfreq.csv,96,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2021
+onlinec,ETTh1_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2022
+onlinep,ETTh1_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2022
+evalchk,ETTh1_shift_warp25.csv,96,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2022
+onlinec,ETTm2_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2023
+onlinep,ETTm2_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2023
+evalchk,ETTm2_shift_noise10t.csv,336,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2023
+onlinec,weather_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2023
+onlinep,weather_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2023
+evalchk,weather_shift_newfreq.csv,336,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_newfreq_96_336_direct_seed2023
+onlinec,ETTh1_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2022
+onlinep,ETTh1_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2022
+evalchk,ETTh1_shift_noise10t.csv,336,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_336_direct_seed2022
+onlinec,weather_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2023
+onlinep,weather_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2023
+evalchk,weather_shift_noise10t.csv,336,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2023
+onlinec,ETTm2_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2021
+onlinep,ETTm2_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2021
+evalchk,ETTm2_shift_warp10.csv,336,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_336_direct_seed2021
+onlinec,weather_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2021
+onlinep,weather_shift_noise10t.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2021
+evalchk,weather_shift_noise10t.csv,336,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_noise10t_96_336_direct_seed2021
+onlinec,ETTh2_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2023
+onlinep,ETTh2_shift_noise10t.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2023
+evalchk,ETTh2_shift_noise10t.csv,336,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_336_direct_seed2023
+onlinec,ETTh2_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2022
+onlinep,ETTh2_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2022
+evalchk,ETTh2_shift_newfreq.csv,336,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_336_direct_seed2022
+onlinec,weather_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2021
+onlinep,weather_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2021
+evalchk,weather_shift_warp25.csv,336,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2021
+onlinec,ETTh2_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2021
+onlinep,ETTh2_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2021
+evalchk,ETTh2_shift_warp10.csv,96,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2021
+onlinec,ETTh1_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2022
+onlinep,ETTh1_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2022
+evalchk,ETTh1_shift_warp10.csv,336,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2022
+onlinec,weather_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2023
+onlinep,weather_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2023
+evalchk,weather_shift_warp25.csv,96,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2023
+onlinec,weather_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2022
+onlinep,weather_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2022
+evalchk,weather_shift_noise10t.csv,96,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2022
+onlinec,ETTh1_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2021
+onlinep,ETTh1_shift_warp25.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2021
+evalchk,ETTh1_shift_warp25.csv,336,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2021
+onlinec,ETTm2_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2022
+onlinep,ETTm2_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2022
+evalchk,ETTm2_shift_noise10t.csv,96,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2022
+onlinec,ETTh1_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2022
+onlinep,ETTh1_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2022
+evalchk,ETTh1_shift_noise10t.csv,96,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2022
+onlinec,weather_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2023
+onlinep,weather_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2023
+evalchk,weather_shift_warp10.csv,96,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2023
+onlinec,weather_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2022
+onlinep,weather_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2022
+evalchk,weather_shift_warp25.csv,336,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp25_96_336_direct_seed2022
+onlinec,ETTh1_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2023
+onlinep,ETTh1_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2023
+evalchk,ETTh1_shift_warp25.csv,336,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2023
+onlinec,ETTh1_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2022
+onlinep,ETTh1_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2022
+evalchk,ETTh1_shift_newfreq.csv,96,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_96_direct_seed2022
+onlinec,ETTm2_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2022
+onlinep,ETTm2_shift_warp10.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2022
+evalchk,ETTm2_shift_warp10.csv,96,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2022
+onlinec,ETTh2_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2023
+onlinep,ETTh2_shift_warp10.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2023
+evalchk,ETTh2_shift_warp10.csv,96,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_96_direct_seed2023
+onlinec,ETTh2_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2022
+onlinep,ETTh2_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2022
+evalchk,ETTh2_shift_warp10.csv,336,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2022
+onlinec,ETTh1_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2022
+onlinep,ETTh1_shift_newfreq.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2022
+evalchk,ETTh1_shift_newfreq.csv,336,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2022
+onlinec,ETTm2_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2023
+onlinep,ETTm2_shift_warp25.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2023
+evalchk,ETTm2_shift_warp25.csv,336,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_336_direct_seed2023
+onlinec,ETTh1_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2023
+onlinep,ETTh1_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2023
+evalchk,ETTh1_shift_warp25.csv,96,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2023
+onlinec,ETTm2_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2023
+onlinep,ETTm2_shift_warp25.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2023
+evalchk,ETTm2_shift_warp25.csv,96,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2023
+onlinec,ETTh2_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2023
+onlinep,ETTh2_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2023
+evalchk,ETTh2_shift_warp10.csv,336,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2023
+onlinec,weather_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2022
+onlinep,weather_shift_warp10.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2022
+evalchk,weather_shift_warp10.csv,336,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2022
+onlinec,weather_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2022
+onlinep,weather_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2022
+evalchk,weather_shift_newfreq.csv,96,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_newfreq_96_96_direct_seed2022
+onlinec,weather_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2021
+onlinep,weather_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2021
+evalchk,weather_shift_warp10.csv,96,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp10_96_96_direct_seed2021
+onlinec,ETTh2_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2023
+onlinep,ETTh2_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2023
+evalchk,ETTh2_shift_noise10t.csv,96,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2023
+onlinec,ETTh1_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2022
+onlinep,ETTh1_shift_warp25.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2022
+evalchk,ETTh1_shift_warp25.csv,336,2022,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_336_direct_seed2022
+onlinec,ETTm2_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2021
+onlinep,ETTm2_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2021
+evalchk,ETTm2_shift_warp10.csv,96,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp10_96_96_direct_seed2021
+onlinec,ETTm2_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2021
+onlinep,ETTm2_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2021
+evalchk,ETTm2_shift_noise10t.csv,96,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_96_direct_seed2021
+onlinec,ETTh2_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2022
+onlinep,ETTh2_shift_noise10t.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2022
+evalchk,ETTh2_shift_noise10t.csv,96,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_noise10t_96_96_direct_seed2022
+onlinec,ETTm2_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2022
+onlinep,ETTm2_shift_noise10t.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2022
+evalchk,ETTm2_shift_noise10t.csv,336,2022,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_noise10t_96_336_direct_seed2022
+onlinec,ETTh1_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2021
+onlinep,ETTh1_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2021
+evalchk,ETTh1_shift_noise10t.csv,96,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2021
+onlinec,weather_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2022
+onlinep,weather_shift_warp25.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2022
+evalchk,weather_shift_warp25.csv,96,2022,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp25_96_96_direct_seed2022
+onlinec,ETTh1_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2021
+onlinep,ETTh1_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2021
+evalchk,ETTh1_shift_warp10.csv,336,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_336_direct_seed2021
+onlinec,weather_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2021
+onlinep,weather_shift_noise10t.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2021
+evalchk,weather_shift_noise10t.csv,96,2021,direct,--eval_only,weather.csv,r2_shift_weather_shift_noise10t_96_96_direct_seed2021
+onlinec,ETTh1_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2023
+onlinep,ETTh1_shift_noise10t.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2023
+evalchk,ETTh1_shift_noise10t.csv,96,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_noise10t_96_96_direct_seed2023
+onlinec,ETTh2_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2022
+onlinep,ETTh2_shift_newfreq.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2022
+evalchk,ETTh2_shift_newfreq.csv,96,2022,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2022
+onlinec,ETTh2_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2021
+onlinep,ETTh2_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2021
+evalchk,ETTh2_shift_warp25.csv,96,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp25_96_96_direct_seed2021
+onlinec,weather_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2023
+onlinep,weather_shift_warp10.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2023
+evalchk,weather_shift_warp10.csv,336,2023,direct,--eval_only,weather.csv,r2_shift_weather_shift_warp10_96_336_direct_seed2023
+onlinec,ETTh2_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2021
+onlinep,ETTh2_shift_warp10.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2021
+evalchk,ETTh2_shift_warp10.csv,336,2021,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_warp10_96_336_direct_seed2021
+onlinec,ETTh1_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2021
+onlinep,ETTh1_shift_warp10.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2021
+evalchk,ETTh1_shift_warp10.csv,96,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp10_96_96_direct_seed2021
+onlinec,ETTm2_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2021
+onlinep,ETTm2_shift_newfreq.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2021
+evalchk,ETTm2_shift_newfreq.csv,336,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_336_direct_seed2021
+onlinec,ETTh1_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2021
+onlinep,ETTh1_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2021
+evalchk,ETTh1_shift_warp25.csv,96,2021,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_warp25_96_96_direct_seed2021
+onlinec,ETTm2_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2021
+onlinep,ETTm2_shift_warp25.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2021
+evalchk,ETTm2_shift_warp25.csv,96,2021,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_warp25_96_96_direct_seed2021
+onlinec,ETTh1_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2023
+onlinep,ETTh1_shift_newfreq.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2023
+evalchk,ETTh1_shift_newfreq.csv,336,2023,direct,--eval_only,ETTh1.csv,r2_shift_ETTh1_shift_newfreq_96_336_direct_seed2023
+onlinec,ETTm2_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2023
+onlinep,ETTm2_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2023
+evalchk,ETTm2_shift_newfreq.csv,96,2023,direct,--eval_only,ETTm2.csv,r2_shift_ETTm2_shift_newfreq_96_96_direct_seed2023
+onlinec,ETTh2_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2023
+onlinep,ETTh2_shift_newfreq.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2023
+evalchk,ETTh2_shift_newfreq.csv,96,2023,direct,--eval_only,ETTh2.csv,r2_shift_ETTh2_shift_newfreq_96_96_direct_seed2023
+onlinec,ETTm2.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTm2_96_96_direct_seed2021
+onlinep,ETTm2.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTm2_96_96_direct_seed2021
+evalchk,ETTm2.csv,96,2021,direct,--eval_only,,r2_ctrl_ETTm2_96_96_direct_seed2021
+onlinec,weather.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_weather_96_96_direct_seed2023
+onlinep,weather.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_weather_96_96_direct_seed2023
+evalchk,weather.csv,96,2023,direct,--eval_only,,r2_ctrl_weather_96_96_direct_seed2023
+onlinec,weather.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_weather_96_336_direct_seed2021
+onlinep,weather.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_weather_96_336_direct_seed2021
+evalchk,weather.csv,336,2021,direct,--eval_only,,r2_ctrl_weather_96_336_direct_seed2021
+onlinec,ETTh1.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh1_96_336_direct_seed2023
+onlinep,ETTh1.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh1_96_336_direct_seed2023
+evalchk,ETTh1.csv,336,2023,direct,--eval_only,,r2_ctrl_ETTh1_96_336_direct_seed2023
+onlinec,ETTm2.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTm2_96_96_direct_seed2022
+onlinep,ETTm2.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTm2_96_96_direct_seed2022
+evalchk,ETTm2.csv,96,2022,direct,--eval_only,,r2_ctrl_ETTm2_96_96_direct_seed2022
+onlinec,ETTh2.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh2_96_96_direct_seed2021
+onlinep,ETTh2.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh2_96_96_direct_seed2021
+evalchk,ETTh2.csv,96,2021,direct,--eval_only,,r2_ctrl_ETTh2_96_96_direct_seed2021
+onlinec,ETTh1.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh1_96_336_direct_seed2022
+onlinep,ETTh1.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh1_96_336_direct_seed2022
+evalchk,ETTh1.csv,336,2022,direct,--eval_only,,r2_ctrl_ETTh1_96_336_direct_seed2022
+onlinec,weather.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_weather_96_336_direct_seed2022
+onlinep,weather.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_weather_96_336_direct_seed2022
+evalchk,weather.csv,336,2022,direct,--eval_only,,r2_ctrl_weather_96_336_direct_seed2022
+onlinec,ETTh1.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh1_96_96_direct_seed2022
+onlinep,ETTh1.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh1_96_96_direct_seed2022
+evalchk,ETTh1.csv,96,2022,direct,--eval_only,,r2_ctrl_ETTh1_96_96_direct_seed2022
+onlinec,ETTh2.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh2_96_336_direct_seed2022
+onlinep,ETTh2.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh2_96_336_direct_seed2022
+evalchk,ETTh2.csv,336,2022,direct,--eval_only,,r2_ctrl_ETTh2_96_336_direct_seed2022
+onlinec,ETTm2.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTm2_96_96_direct_seed2023
+onlinep,ETTm2.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTm2_96_96_direct_seed2023
+evalchk,ETTm2.csv,96,2023,direct,--eval_only,,r2_ctrl_ETTm2_96_96_direct_seed2023
+onlinec,ETTh1.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh1_96_96_direct_seed2023
+onlinep,ETTh1.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh1_96_96_direct_seed2023
+evalchk,ETTh1.csv,96,2023,direct,--eval_only,,r2_ctrl_ETTh1_96_96_direct_seed2023
+onlinec,ETTh2.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh2_96_336_direct_seed2023
+onlinep,ETTh2.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh2_96_336_direct_seed2023
+evalchk,ETTh2.csv,336,2023,direct,--eval_only,,r2_ctrl_ETTh2_96_336_direct_seed2023
+onlinec,ETTh2.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh2_96_96_direct_seed2022
+onlinep,ETTh2.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh2_96_96_direct_seed2022
+evalchk,ETTh2.csv,96,2022,direct,--eval_only,,r2_ctrl_ETTh2_96_96_direct_seed2022
+onlinec,weather.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_weather_96_96_direct_seed2021
+onlinep,weather.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_weather_96_96_direct_seed2021
+evalchk,weather.csv,96,2021,direct,--eval_only,,r2_ctrl_weather_96_96_direct_seed2021
+onlinec,ETTh1.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh1_96_336_direct_seed2021
+onlinep,ETTh1.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh1_96_336_direct_seed2021
+evalchk,ETTh1.csv,336,2021,direct,--eval_only,,r2_ctrl_ETTh1_96_336_direct_seed2021
+onlinec,ETTm2.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTm2_96_336_direct_seed2021
+onlinep,ETTm2.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTm2_96_336_direct_seed2021
+evalchk,ETTm2.csv,336,2021,direct,--eval_only,,r2_ctrl_ETTm2_96_336_direct_seed2021
+onlinec,ETTh2.csv,336,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh2_96_336_direct_seed2021
+onlinep,ETTh2.csv,336,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh2_96_336_direct_seed2021
+evalchk,ETTh2.csv,336,2021,direct,--eval_only,,r2_ctrl_ETTh2_96_336_direct_seed2021
+onlinec,ETTh1.csv,96,2021,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh1_96_96_direct_seed2021
+onlinep,ETTh1.csv,96,2021,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh1_96_96_direct_seed2021
+evalchk,ETTh1.csv,96,2021,direct,--eval_only,,r2_ctrl_ETTh1_96_96_direct_seed2021
+onlinec,ETTm2.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTm2_96_336_direct_seed2023
+onlinep,ETTm2.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTm2_96_336_direct_seed2023
+evalchk,ETTm2.csv,336,2023,direct,--eval_only,,r2_ctrl_ETTm2_96_336_direct_seed2023
+onlinec,ETTh2.csv,96,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTh2_96_96_direct_seed2023
+onlinep,ETTh2.csv,96,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTh2_96_96_direct_seed2023
+evalchk,ETTh2.csv,96,2023,direct,--eval_only,,r2_ctrl_ETTh2_96_96_direct_seed2023
+onlinec,weather.csv,336,2023,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_weather_96_336_direct_seed2023
+onlinep,weather.csv,336,2023,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_weather_96_336_direct_seed2023
+evalchk,weather.csv,336,2023,direct,--eval_only,,r2_ctrl_weather_96_336_direct_seed2023
+onlinec,weather.csv,96,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_weather_96_96_direct_seed2022
+onlinep,weather.csv,96,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_weather_96_96_direct_seed2022
+evalchk,weather.csv,96,2022,direct,--eval_only,,r2_ctrl_weather_96_96_direct_seed2022
+onlinec,ETTm2.csv,336,2022,direct,--eval_only --cv_reestimate_test causal,,r2_ctrl_ETTm2_96_336_direct_seed2022
+onlinep,ETTm2.csv,336,2022,direct,--eval_only --cv_reestimate_test pooled,,r2_ctrl_ETTm2_96_336_direct_seed2022
+evalchk,ETTm2.csv,336,2022,direct,--eval_only,,r2_ctrl_ETTm2_96_336_direct_seed2022

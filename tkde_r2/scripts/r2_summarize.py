@@ -118,7 +118,10 @@ def shifts() -> None:
         # FAN with the official per-frequency top-k only (earlier runs used the default k=20)
         nc = nc[~(nc.extra.str.contains("fan") & ~nc.extra.str.contains("fan_topk"))]
         nc["mode"] = np.where(nc.extra.str.contains("fan"), "fan", "san")
-    allr = pd.concat([d, clean, nc], ignore_index=True)
+    on = load("onlinec_results.csv") if (R2 / "onlinec_results.csv").exists() else pd.DataFrame()
+    if len(on):  # causal online re-estimation of S at test time, same checkpoints as "direct"
+        on = on[on.tag == "onlinec"].assign(mode="online")
+    allr = pd.concat([d, clean, nc, on], ignore_index=True)
     elec = allr[allr.dataset == "ECL"]
     allr = allr[allr.dataset != "ECL"]
     cm = allr.groupby(["dataset", "horizon", "pert", "mode"]).mse.mean().unstack("mode")
@@ -129,8 +132,8 @@ def shifts() -> None:
     for idx in deg.index:
         deg.loc[idx] = (cm.loc[idx] / clean_ref.loc[(idx[0], idx[1])] - 1) * 100
     deg.to_csv(R2 / "shift_degradation.csv")
-    modes = [m for m in ["direct", "none", "constant", "inverse", "learned_mask", "fan", "san"] if m in cm.columns]
-    label = {"direct": "Fredformer-v2", "none": "w/o FredNormer", "constant": "Const.", "inverse": "Inv. CV",
+    modes = [m for m in ["direct", "online", "none", "constant", "inverse", "learned_mask", "fan", "san"] if m in cm.columns]
+    label = {"direct": "Fredformer-v2", "online": "Fredformer-v2, online $S$", "none": "w/o FredNormer", "constant": "Const.", "inverse": "Inv. CV",
              "learned_mask": "Learned mask", "fan": "w/o FN + FAN", "san": "w/o FN + SAN"}
     per = cm.groupby(level="pert").mean()[modes]
     lines = [r"\begin{tabular}{l" + "c" * len(modes) + "}", r"\toprule",
@@ -188,7 +191,7 @@ def plugins() -> None:
             fa = r"\textbf{%.3f}" if a <= b else "%.3f"
             fb = r"\textbf{%.3f}" if b < a else "%.3f"
             cells += [(fa % a) + r"\tiny{$\pm$%.3f}" % sa, (fb % b) + r"\tiny{$\pm$%.3f}" % sb]
-        lines.append(dname + " & " + " & ".join(cells) + r" \\")
+        lines.append(DISPLAY.get(dname, dname) + " & " + " & ".join(cells) + r" \\")
     lines += [r"\midrule", "Wins (cells) & " + " & ".join(
         r"\multicolumn{2}{c}{%d/%d}" % (r.plugin_better, r.cells) for r in t.itertuples()) + r" \\",
         r"$p_{\mathrm{Holm}}$ & " + " & ".join(r"\multicolumn{2}{c}{%.2f}" % r.p_holm for r in t.itertuples()) + r" \\",
@@ -206,8 +209,8 @@ def _b(vals):
 def shift_full() -> None:
     cm = pd.read_csv(R2 / "shift_cell_means.csv").set_index(["dataset", "horizon", "pert"])
     deg = pd.read_csv(R2 / "shift_degradation.csv").set_index(["dataset", "horizon", "pert"])
-    modes = [m for m in ["direct", "none", "constant", "inverse", "learned_mask", "fan", "san"] if m in cm.columns]
-    label = {"direct": "Ours", "none": "w/o FN", "constant": "Const.", "inverse": "Inv.", "learned_mask": "Mask",
+    modes = [m for m in ["direct", "online", "none", "constant", "inverse", "learned_mask", "fan", "san"] if m in cm.columns]
+    label = {"direct": "Ours", "online": "Ours, online $S$", "none": "w/o FN", "constant": "Const.", "inverse": "Inv.", "learned_mask": "Mask",
              "fan": "+FAN", "san": "+SAN"}
     pn = {"clean": "clean", "warp10": "warp 1.10", "warp25": "warp 1.25", "newfreq": "period 17", "noise10t": "noise"}
     lines = [r"\begin{tabular}{lll" + "c" * len(modes) + "}", r"\toprule",
@@ -242,7 +245,7 @@ def plugin_full() -> None:
                 cells += _b([mean.loc[(m, d, h), "cv0"], mean.loc[(m, d, h), "cv1"]])
             else:
                 cells += ["--", "--"]
-        lines.append(f"{d} & {h} & " + " & ".join(cells) + r" \\")
+        lines.append(f"{DISPLAY.get(d, d)} & {h} & " + " & ".join(cells) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     (TEX / "r2_plugin_full.tex").write_text("\n".join(lines) + "\n")
 
@@ -300,6 +303,7 @@ def efficiency(main_only: bool = True) -> None:
 
 
 GPU_GB = 96
+DISPLAY = {"weather": "Weather", "electricity": "ECL", "traffic": "Traffic"}
 
 
 if __name__ == "__main__":
