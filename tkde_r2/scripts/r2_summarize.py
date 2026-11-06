@@ -194,7 +194,7 @@ def plugins() -> None:
         lines.append(DISPLAY.get(dname, dname) + " & " + " & ".join(cells) + r" \\")
     lines += [r"\midrule", "Wins (cells) & " + " & ".join(
         r"\multicolumn{2}{c}{%d/%d}" % (r.plugin_better, r.cells) for r in t.itertuples()) + r" \\",
-        r"$p_{\mathrm{Holm}}$ & " + " & ".join(r"\multicolumn{2}{c}{%.2f}" % r.p_holm for r in t.itertuples()) + r" \\",
+        r"$p_{\mathrm{Holm}}$ & " + " & ".join(r"\multicolumn{2}{c}{%s}" % ("$<$0.01" if r.p_holm < 0.01 else "%.2f" % r.p_holm) for r in t.itertuples()) + r" \\",
         r"\bottomrule", r"\end{tabular}"]
     (TEX / "r2_plugin.tex").write_text("\n".join(lines) + "\n")
     print(t.round(4).to_string())
